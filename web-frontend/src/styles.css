@@ -70,3 +70,12 @@
       display:none;
     }
   }
+
+  .addAssetButton {
+    color: rgba(255,255,255,0.7);
+    cursor:pointer;
+  }
+  .addAssetButton:hover {
+    color: rgba(255,255,255,1);
+    cursor:pointer;
+  }

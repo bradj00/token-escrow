@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { generalContext } from '../App';
 import WarningIcon from '@mui/icons-material/Warning';
-
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 const P1AssetBox = () => {
 
@@ -10,15 +10,21 @@ const P1AssetBox = () => {
 
   return (
     <div style={{display:'flex', justifyContent:'center', alignItems:'center',marginTop:'50vh'}}>
-        <div style={{paddingLeft:'0.5vw', display:'flex', justifyContent:'center',position:'absolute', top:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(40, 78, 255, 0.3)'}}>
+        <div style={{paddingLeft:'0.5vw', display:'flex',  justifyContent:'center',position:'absolute', top:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(40, 78, 255, 0.3)'}}>
           <div>
             <div style={{position:'absolute',left:'5%',fontSize:'2vh'}}>party1.eth</div> ERC-20 Assets
           </div>  
+          <div style={{width:'83%',height:'75%',left:'1%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
+
+          </div>
         </div>
         <div style={{paddingLeft:'0.5vw', display:'flex', justifyContent:'center',position:'absolute', bottom:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(40, 38, 255, 0.44)'}}>
           <div>
           <div style={{position:'absolute',left:'5%',fontSize:'2vh'}}>party1.eth</div> ERC-721 Assets
           </div>  
+          <div style={{width:'83%',height:'75%',left:'1%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
+
+          </div>
         </div>
 
         
@@ -36,7 +42,17 @@ const P1AssetBox = () => {
             <div className="finalizeButtonWithHover" style={{fontSize:'4vh', display:'flex', justifyContent:'center', alignItems:'center', position:'absolute',bottom:'3vh', width:'40%', height:'10%'}}>
               Confirm
             </div>
+            
+
         </div>
+            <div className="addAssetButton" style={{position:'absolute', top:'10vh',transform:'scale(3)', right:'5%'}}>
+            <AddBoxIcon />
+            </div>
+
+            <div className="addAssetButton" style={{position:'absolute', top:'30vh',transform:'scale(3)', right:'5%'}}>
+            <AddBoxIcon />
+            </div>
+
         
         
     </div>
