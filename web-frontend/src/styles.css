@@ -1,0 +1,72 @@
+.buttonWithHover {
+    color :#fff;
+    border: 1px solid rgba(150,150,250,0.5);
+    padding: 1vw;
+    border-radius:10px;
+    background-color:rgba(250,250,250,0.5);
+    user-select: none;
+    cursor: pointer;
+}
+.buttonWithHover:hover {
+    color :#fff;
+    border: 1px solid rgba(150,150,250,1);
+    padding: 1vw;
+    border-radius:10px;
+    background-color:rgba(150,150,250,0.5);
+    user-select: none;
+    cursor: pointer;
+}
+.finalizeButtonWithHover {
+    color :#fff;
+    border: 1px solid rgba(150,150,250,0.5);
+    padding: 1vw;
+    border-radius:10px;
+    background-color:rgba(250,250,250,0.1);
+    user-select: none;
+    cursor: pointer;
+}
+.finalizeButtonWithHover:hover {
+    color :#fff;
+    border: 1px solid rgba(150,150,250,1);
+    padding: 1vw;
+    border-radius:10px;
+    background-color:rgba(50,250,50,0.5);
+    user-select: none;
+    cursor: pointer;
+}
+
+.backButtonHover {
+    color: rgba(255,255,255,0.3);
+    cursor: pointer;
+}
+.backButtonHover:hover {
+    color: rgba(255,255,255,1);
+    cursor: pointer;
+}
+
+.hiddenConfirmationbox {
+    animation: disappear 0.25s forwards;
+
+}
+
+.confirmationBox {
+    animation: apparate 0.25s;
+}
+
+@keyframes apparate {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+@keyframes disappear {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0);
+      display:none;
+    }
+  }
