@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react'
 import { generalContext } from '../App';
-
+import WarningIcon from '@mui/icons-material/Warning';
 
 
 const P1AssetBox = () => {
@@ -22,11 +22,14 @@ const P1AssetBox = () => {
         </div>
 
         
-        <div className={clickedFinalize?"confirmationBox":"hiddenConfirmationbox"} style={{borderRadius:'5px',  border:'1px solid rgba(255,255,255,0.2)', zIndex:'9999', display:'flex', justifyContent:'center', alignItems:'center', position:'absolute',width:'80%', height:'160%', backgroundColor:'rgba(10,80,200,1)'}}>
+        <div className={clickedFinalize?"confirmationBox":"hiddenConfirmationbox"} style={{borderRadius:'5px',  border:'1px solid rgba(153, 21, 121, 1)', zIndex:'9999', display:'flex', justifyContent:'center', alignItems:'center', position:'absolute',width:'80%', height:'160%', backgroundColor:'rgba(23, 21, 121, 1)'}}>
             <div onClick={()=>{setclickedFinalize(false)}} className="finalizeButtonWithHover" style={{ padding:'1.5vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', top:'1%',right:'1%',}}>
                 X
             </div>
-            <div style={{userSelect:'none', fontSize:'3vh', color:'#fff', textAlign:'center', position:'absolute', width:'95%', height:'60%', backgroundColor:'rgba(0,0,0,0.1)'}}>
+            <div style={{position:'absolute', top:'5vh',transform:'scale(4)', color:'yellow'}}>
+            <WarningIcon />
+            </div>
+            <div style={{userSelect:'none', fontSize:'3vh', color:'#fff', textAlign:'center', position:'absolute', width:'95%', height:'60%', backgroundColor:'rgba(0,0,0,0.2)',borderRadius:'5px',padding:'1vw'}}>
               Review the trade <br></br><span style={{color:"#ff0000"}}>VERY CAREFULLY.</span><br></br> Refresh the page to ensure data is current before accepting! <br></br><br></br>Click the button below to confirm you are satisfied with how the trade appears.  
             </div>
 
