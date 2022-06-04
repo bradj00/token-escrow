@@ -34,6 +34,24 @@
     user-select: none;
     cursor: pointer;
 }
+.ejectButtonWithHover {
+    color :#fff;
+    border: 1px solid rgba(150,150,250,0.5);
+    padding: 1vw;
+    border-radius:10px;
+    background-color:rgba(250,250,250,0.1);
+    user-select: none;
+    cursor: pointer;
+}
+.ejectButtonWithHover:hover {
+    color :#fff;
+    border: 1px solid rgba(150,150,250,1);
+    padding: 1vw;
+    border-radius:10px;
+    background-color:rgba(250,50,50,0.5);
+    user-select: none;
+    cursor: pointer;
+}
 
 .backButtonHover {
     color: rgba(255,255,255,0.3);
@@ -78,4 +96,11 @@
   .addAssetButton:hover {
     color: rgba(255,255,255,1);
     cursor:pointer;
+  }
+
+  .selectATokenEntry {
+    background-color: rgba(50,50,250,0.2);
+  }
+  .selectATokenEntry:hover {
+    background-color: rgba(50,50,250,0.7);
   }

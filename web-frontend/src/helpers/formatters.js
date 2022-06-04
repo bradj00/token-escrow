@@ -15,6 +15,10 @@ export const n6 = new Intl.NumberFormat("en-us", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
+  export function commaNumber(x) {
+    // return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toLocaleString(navigator.language, { minimumFractionDigits: 2 });
+  }
   
   /**
    * Returns a string of form "abc...xyz"

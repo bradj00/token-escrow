@@ -5,7 +5,6 @@ import React, {useEffect, useState} from 'react';
 import {MoralisProvider, } from 'react-moralis';
 import AccountTitle from './components/AccountTitle';
 import CounterPartyAddressInput from './components/CounterPartyAddressInput';
-import EscrowHistory from './components/EscrowHistory';
 import HomePage from './components/HomePage';
 import OfferTable from './components/OfferTable';
 
@@ -15,9 +14,15 @@ export const generalContext   = React.createContext({});
 function App() {
     const [showPage, setshowPage] = useState('home');
     const [clickedFinalize, setclickedFinalize] = useState(false);
+    const [userErc20TokenBalance, setuserErc20TokenBalance] = useState();
+
+
+
+
     const contextObj = {
       showPage, setshowPage,
-      clickedFinalize, setclickedFinalize
+      clickedFinalize, setclickedFinalize,
+      userErc20TokenBalance, setuserErc20TokenBalance
     };
 
 
@@ -33,6 +38,15 @@ function App() {
           <OfferTable />
         :<></>}
 
+        {showPage == 'addErc20P1'?
+          <></>
+        :<></>}
+        
+        {showPage == 'addErc721P1'?
+          <></>
+        :<></>}
+        
+        
         <div style={{boxShadow:'inset 0 0 5px rgba(255,255,255,0.3)', position:'absolute', width:'100vw', height:'100vh', backgroundColor:'rgba(0,0,0,0.9)', color:'#fff', justifyContent:'center', alignItems:'center', display:'flex', fontSize:'2vh', userSelect:'none'}}>
           {/* base canvas */}
         </div>
