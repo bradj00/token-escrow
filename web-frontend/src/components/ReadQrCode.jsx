@@ -18,6 +18,9 @@ const ReadQrCode = () => {
                         // console.info(error);
                     }
                     }}
+                    constraints={{
+                        facingMode: 'environment'
+                    }}
                     style={{ width: '100%' }}
                 />
                 <p>{data}</p>
