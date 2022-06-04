@@ -17,7 +17,7 @@ const CounterPartyAddressInput = () => {
             Open New Escrow
         </div>
         
-        <div onClick={()=>{setshowPage('offer')}} className="buttonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-270%',}}>
+        <div onClick={()=>{setshowPage('getQrCode')}} className="buttonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-270%',}}>
             Join by QR Code
         </div>
     </div>

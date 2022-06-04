@@ -7,7 +7,7 @@ import AccountTitle from './components/AccountTitle';
 import CounterPartyAddressInput from './components/CounterPartyAddressInput';
 import HomePage from './components/HomePage';
 import OfferTable from './components/OfferTable';
-
+import ReadQrCode from './components/ReadQrCode';
 
 export const generalContext   = React.createContext({});
 
@@ -34,16 +34,13 @@ function App() {
         {showPage == 'home'?
           <HomePage />
         :<></>}
+
         {showPage == 'offer'?
           <OfferTable />
         :<></>}
-
-        {showPage == 'addErc20P1'?
-          <></>
-        :<></>}
         
-        {showPage == 'addErc721P1'?
-          <></>
+        {showPage == 'getQrCode'?
+          <ReadQrCode />
         :<></>}
         
         
