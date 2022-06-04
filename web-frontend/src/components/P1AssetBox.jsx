@@ -13,7 +13,7 @@ const P1AssetBox = () => {
   const {clickedFinalize, setclickedFinalize}             = useContext(generalContext);
   const {userErc20TokenBalance, setuserErc20TokenBalance} = useContext(generalContext);
   
-  const [displayUserErc20Assets, setdisplayUserErc20Assets] = useState(true);
+  const [displayUserErc20Assets, setdisplayUserErc20Assets] = useState(false);
   
   //{ fetchERC20Balances, data, isLoading, isFetching, error }
   const getUserErc20Balances = useERC20Balances();
@@ -34,7 +34,7 @@ const P1AssetBox = () => {
   return (
     <>
     {displayUserErc20Assets ? 
-    <div style={{fontSize:'3vh', position:'absolute', top:'0', display:'flex', textAlign:'center', justifyContent:'center', alignItems:'center', width:'100%',height:'90vh', zIndex:'9999',backgroundColor:'rgba(40, 38, 120, 1)',border:'1px solid #0088ff',borderRadius:'5px'}}>
+    <div className="confirmationBox" style={{fontSize:'3vh', position:'absolute', top:'0', display:'flex', textAlign:'center', justifyContent:'center', alignItems:'center', width:'100%',height:'90vh', zIndex:'9999',backgroundColor:'rgba(40, 38, 120, 1)',border:'1px solid #0088ff',borderRadius:'5px'}}>
       <TheUserErc20Balances userErc20TokenBalance={userErc20TokenBalance} displayUserErc20Assets={displayUserErc20Assets} setdisplayUserErc20Assets={setdisplayUserErc20Assets}/>
     </div>
     :<></>}

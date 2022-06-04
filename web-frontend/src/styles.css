@@ -63,8 +63,9 @@
 }
 
 .hiddenConfirmationbox {
-    animation: disappear 0.25s forwards;
-
+    /* animation: disappear 0.25s forwards; */
+    display: none;
+    transform: scale(0);
 }
 
 .confirmationBox {
