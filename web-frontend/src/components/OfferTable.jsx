@@ -46,7 +46,7 @@ const OfferTable = (props) => {
             <div style={{userSelect:'none',border: '1px solid #999', position:'absolute', height:'40%', width:'95%',top:'8%', backgroundColor:'rgba(50,50,50,0.9)', borderRadius:'5px', padding:'1vw',display:'flex', justifyContent:'center', alignItems:'center', color:'#fff'}}>
                 <P1AssetBox />
             </div>
-            <div onClick={()=>{setclickedFinalize(true)}} className="ejectButtonWithHover" style={{fontSize:'3vh', padding:'1.5vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', left:'15%', top:'50%',}}>
+            <div onClick={()=>{setclickedFinalize(true)}} className="ejectButtonWithHover" style={{fontSize:'5vh', padding:'0.1vh', paddingLeft:'2vh', paddingRight:'2vh', position:'absolute', left:'12%', top:'50%',}}>
                 Eject
             </div>
             <div onClick={()=>{setclickedFinalize(true)}} className="finalizeButtonWithHover" style={{fontSize:'5vh', padding:'0.1vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', right:'16%', top:'50%',}}>
