@@ -60,7 +60,7 @@ const TheUserErc20Balances = (props) => {
                                 
                                 {displaySetQty[index]?
                                     <div style={{alignItems:'center', position:'absolute', width:'50%',display:'flex', justifyContent:'center', borderRadius:'15px',right:'13vw',height:'80%',zIndex:'9999',}}>
-                                        <input type="number" style={{height:'100%',width:'100%',color:'#fff',borderRadius:'15px',backgroundColor:'rgba(0,0,0,0.4)',fontSize:'2.5vh',textAlign:'left',paddingLeft:'1%',fontSize:'5vh', border:'none',}} placeholder="0.0" autoFocus={true}></input>
+                                        <input type="number" pattern="\d*" style={{height:'100%',width:'100%',color:'#fff',borderRadius:'15px',backgroundColor:'rgba(0,0,0,0.4)',fontSize:'2.5vh',textAlign:'left',paddingLeft:'1%',fontSize:'5vh', border:'none',}} placeholder="0.0" autoFocus={true}></input>
                                     
                                         
                                     </div>
