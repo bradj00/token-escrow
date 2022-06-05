@@ -106,9 +106,27 @@
     background-color: rgba(50,50,250,0.7);
   }
 
-  th {
-    
+  a {
+    color:#fff;
+    text-decoration:none;
   }
+  a:hover {
+    color:#fff;
+    text-decoration:underline;
+  }
+ 
   td {
     text-align: center;
+  }
+  td:hover {
+    text-align: center;
+    /* background-color:rgba(255,255,255,0.3); */
+  }
+
+  .counterButtons{
+    filter:opacity(0.7);
+  }
+  .counterButtons:hover {
+    filter:opacity(1);
+    cursor:pointer;
   }

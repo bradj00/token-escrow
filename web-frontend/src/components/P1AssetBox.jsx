@@ -55,17 +55,17 @@ const P1AssetBox = () => {
             <tr>
               <td>RUBY</td>
               <td>14,600</td>
-              <td>https://..</td>
+              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             <tr>
               <td>EMERALD</td>
               <td>9,500,000</td>
-              <td>https://..</td>
+              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             <tr>
               <td>ETH</td>
               <td>14.6</td>
-              <td>https://..</td>
+              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
         </table>
 
@@ -86,17 +86,17 @@ const P1AssetBox = () => {
             <tr>
               <td>RUBY</td>
               <td>14,600</td>
-              <td>https://..</td>
+              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             <tr>
               <td>EMERALD</td>
               <td>9,500,000</td>
-              <td>https://..</td>
+              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             <tr>
               <td>ETH</td>
               <td>14.6</td>
-              <td>https://..</td>
+              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
         </table>
 
