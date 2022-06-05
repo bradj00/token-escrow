@@ -136,4 +136,5 @@
   }
   .okButtonHover:hover {
     background-color: rgba(150,250,150,0.41);
+    cursor:pointer;
   }
