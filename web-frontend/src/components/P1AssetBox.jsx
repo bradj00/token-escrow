@@ -45,6 +45,29 @@ const P1AssetBox = () => {
             <div style={{position:'absolute',left:'5%',fontSize:'2vh'}}>party1.eth</div> ERC-20 Assets
           </div>  
           <div style={{width:'83%',height:'75%',left:'1%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
+     
+          <table style={{width:'100%'}} >
+            <tr style={{backgroundColor:'rgba(100,100,250,0.5)',}}>
+              <th>Asset</th>
+              <th>Amount</th>
+              <th>Contract</th>
+            </tr>
+            <tr>
+              <td>RUBY</td>
+              <td>14,600</td>
+              <td>https://..</td>
+            </tr>
+            <tr>
+              <td>EMERALD</td>
+              <td>9,500,000</td>
+              <td>https://..</td>
+            </tr>
+            <tr>
+              <td>ETH</td>
+              <td>14.6</td>
+              <td>https://..</td>
+            </tr>
+        </table>
 
           </div>
         </div>
@@ -53,6 +76,29 @@ const P1AssetBox = () => {
           <div style={{position:'absolute',left:'5%',fontSize:'2vh'}}>party1.eth</div> ERC-721 Assets
           </div>  
           <div style={{width:'83%',height:'75%',left:'1%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
+
+          <table style={{width:'100%'}} >
+            <tr style={{backgroundColor:'rgba(100,100,250,0.5)',}}>
+              <th>Asset</th>
+              <th>Token ID</th>
+              <th>Contract</th>
+            </tr>
+            <tr>
+              <td>RUBY</td>
+              <td>14,600</td>
+              <td>https://..</td>
+            </tr>
+            <tr>
+              <td>EMERALD</td>
+              <td>9,500,000</td>
+              <td>https://..</td>
+            </tr>
+            <tr>
+              <td>ETH</td>
+              <td>14.6</td>
+              <td>https://..</td>
+            </tr>
+        </table>
 
           </div>
         </div>

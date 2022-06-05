@@ -105,3 +105,10 @@
   .selectATokenEntry:hover {
     background-color: rgba(50,50,250,0.7);
   }
+
+  th {
+    
+  }
+  td {
+    text-align: center;
+  }
