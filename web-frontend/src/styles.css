@@ -130,3 +130,10 @@
     filter:opacity(1);
     cursor:pointer;
   }
+
+  .okButtonHover {
+    background-color: rgba(0,0,0,0.5);
+  }
+  .okButtonHover:hover {
+    background-color: rgba(150,250,150,0.41);
+  }

@@ -4,6 +4,7 @@ import { commaNumber } from '../../helpers/formatters';
 import CancelIcon from '@mui/icons-material/Cancel';
 import SetErc20AddQty from './SetErc20AddQty';
 import { useEffect } from 'react';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const TheUserErc20Balances = (props) => {
   const {Moralis} = useMoralis();
@@ -13,7 +14,7 @@ const TheUserErc20Balances = (props) => {
 
 
   function flagItemSetForSetQty(index){  
-    setdisplaySetQty({[index]: !displaySetQty[index] });
+    setdisplaySetQty({[index]: true });
   }
 
   return (
@@ -35,28 +36,30 @@ const TheUserErc20Balances = (props) => {
             <div style={{position:'relative',paddingBottom:'5vh', top:'0vh',textAlign:'left', fontSize:'2vh',left:'0vw',fontWeight:'bolder',}}>
                 Suggested from your wallet
             </div>
-            <div style={{position:'absolute',paddingBottom:'5vh', top:'0vh',textAlign:'right', fontSize:'2vh',right:'4vw',fontWeight:'bolder',}}>
-                Balance
-            </div>
             
             {props.userErc20TokenBalance? 
                 props.userErc20TokenBalance.map((item, index)=>{
                     return(
-                        <div key={index} className="selectATokenEntry" onClick={()=>{flagItemSetForSetQty(index)}} style={{cursor:'pointer',display:'flex', alignItems:'center', fontSize:'3vh',position:'relative',width:'100%',height:'6vh',marginTop:'0.5vh',marginBottom:'0.5vh',left:'0.5vw'}}>
-                            <div  style={{position:'absolute',left:'1vw',paddingTop:'0.5vh',}}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="8vw" height="5vh" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"  ><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+                        <div key={index} className="selectATokenEntry" onClick={()=>{flagItemSetForSetQty(index)}} style={{cursor:'pointer',display:'flex', alignItems:'center', fontSize:'3vh',position:'relative',width:'100%',height:'12vh',marginTop:'0.5vh',marginBottom:'0.5vh',left:'0.5vw', borderRadius:'15px'}}>
+                            <div  style={{position:'absolute',left:'1vw',paddingTop:'0.5vh', top:'2%'}}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="5vw" height="5vh" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"  ><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
                             </div>
-                            <div  style={{position:'absolute',left:'13%', }}>
+                            <div  style={{position:'absolute',left:'7%',top:'10%', }}>
                                 {item.symbol}
                             </div>
+                            <div  style={{fontSize:'2.5vh', position:'absolute',top:'60%', left:'1vw', color:'rgba(200,200,255,0.9)' }}>
+                                Balance: {commaNumber(parseInt(Moralis.Units.FromWei(item.balance)) )} 
+                            </div>
+                            
                             {displaySetQty[index]?
-                                <div style={{position:'absolute', width:'60%',right:'1vw',height:'80%',backgroundColor:'rgba(70,70,250,0.4)',zIndex:'9999',borderRadius:'10px',display:'flex',justifyContent:'center',}}>
-                                    <input type="number" style={{height:'100%',width:'100%',color:'#fff',backgroundColor:'rgba(0,0,0,0.6)',fontSize:'3vh',textAlign:'center',border:'none',}} placeholder="how many?" autoFocus={true}></input>
+                                <div style={{alignItems:'center', position:'absolute', width:'50%',display:'flex', justifyContent:'center', borderRadius:'15px',right:'13vw',height:'80%',zIndex:'9999',}}>
+                                    <input type="number" style={{height:'100%',width:'100%',color:'#fff',borderRadius:'15px',backgroundColor:'rgba(0,0,0,0.4)',fontSize:'2.5vh',textAlign:'left',paddingLeft:'1%',fontSize:'5vh', border:'none',}} placeholder="0.0" autoFocus={true}></input>
+                                
+                                    <div className="okButtonHover" style={{zIndex:'10000', padding:'3vh 3vw 3vh 3vw', borderRadius:'15px', position:'absolute',right:'-12vw',}}>
+                                        <ThumbUpIcon />
+                                    </div>
                                 </div>
-                            :
-                                <div  style={{position:'absolute',right:'4vw', }}>
-                                    {commaNumber(parseInt(Moralis.Units.FromWei(item.balance)) )} 
-                                </div>
+                            :<></>
                             }
 
                             
