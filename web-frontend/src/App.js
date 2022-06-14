@@ -28,7 +28,7 @@ function App() {
 
 
     return ( 
-      <MoralisProvider appId="1hFLCQEQW1BR1vgJ1hyAivIuHzlnD0GSPPiLhajv" serverUrl="https://y1gpn8k7i4ta.usemoralis.com:2053/server">
+      <MoralisProvider appId="" serverUrl="">
       <generalContext.Provider value={contextObj} >
         
         {showPage == 'home'?

@@ -5,7 +5,7 @@ const P2AssetBox = () => {
   const [anyP2Values, setanyP2Values] = useState();
   return (
     <div style={{display:'flex',justifyContent:'center',}}>
-    {anyP2Values? 
+    {!anyP2Values? 
         <div style={{position:'absolute',width:'100%',height:'90%',top:'0',textAlign:'center',paddingTop:'2vh',}}>
           <QRCode value="some test text" /> 
           <div style={{}}>
