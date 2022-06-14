@@ -5,11 +5,19 @@ import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import P1AssetBox from './P1AssetBox';
 import P2AssetBox from './P2AssetBox';
+import { useNavigate, useLocation, Link } from 'react-router-dom'
+import {getEllipsisTxt} from "../helpers/formatters";
 
 const OfferTable = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);
     const {clickedFinalize, setclickedFinalize} = useContext(generalContext);
 
+    const location = useLocation();
+    const something = location.pathname.replace('/', '');
+
+    useEffect(()=>{
+        console.log('table ID is: ',something);
+    },[something])
     return (
         <div style={{display:'flex', justifyContent:'center', position:'absolute', width:'100%', height:'100%', zIndex:'9999'}}>
             <div style={{overflow:'hidden', zIndex:'0',  display:'flex', justifyContent:'right', right:'0vw', top:'0vh', color:'#fff', zIndex:'9999', position:'absolute',width:'100%', fontSize:'3vh', userSelect:'none'}}>

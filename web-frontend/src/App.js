@@ -15,6 +15,7 @@ function App() {
     const [showPage, setshowPage] = useState('home');
     const [clickedFinalize, setclickedFinalize] = useState(false);
     const [userErc20TokenBalance, setuserErc20TokenBalance] = useState();
+    const [offerTableContractAddress, setofferTableContractAddress] = useState();
 
 
 
@@ -22,13 +23,14 @@ function App() {
     const contextObj = {
       showPage, setshowPage,
       clickedFinalize, setclickedFinalize,
-      userErc20TokenBalance, setuserErc20TokenBalance
+      userErc20TokenBalance, setuserErc20TokenBalance,
+      offerTableContractAddress, setofferTableContractAddress
     };
 
 
 
     return ( 
-      <MoralisProvider appId="" serverUrl="">
+      <MoralisProvider appId="1hFLCQEQW1BR1vgJ1hyAivIuHzlnD0GSPPiLhajv" serverUrl="https://y1gpn8k7i4ta.usemoralis.com:2053/server">
       <generalContext.Provider value={contextObj} >
         
         {showPage == 'home'?

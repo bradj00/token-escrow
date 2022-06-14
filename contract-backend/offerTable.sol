@@ -30,6 +30,10 @@ contract offerTable {
         party2Address = _party2Address;
     }
 
+    function getParties() public view returns(address, address){
+        return (party1Address,party2Address);
+    }
+
     modifier isOfferTableOpen() {
         require(disableOfferTable == false, "Trade has already been executed and table is closed.");
         require(p1RequestEjectBlock == 0, "p1 has initiated ejection from escrow. Cannot continue");
