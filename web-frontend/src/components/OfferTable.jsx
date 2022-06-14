@@ -8,13 +8,16 @@ import P2AssetBox from './P2AssetBox';
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import {getEllipsisTxt} from "../helpers/formatters";
 
+
+
 const OfferTable = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);
     const {clickedFinalize, setclickedFinalize} = useContext(generalContext);
 
     const location = useLocation();
     const something = location.pathname.replace('/', '');
-
+    const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
+    
     useEffect(()=>{
         console.log('table ID is: ',something);
     },[something])
@@ -30,8 +33,8 @@ const OfferTable = (props) => {
                 <div style={{position:'absolute',top:'-5%', left:'14vw', fontSize:'70%'}}>
                     Table ID
                 </div>
-                <div style={{position:'absolute',bottom:'0%', left:'14vw', fontSize:'80%'}}>
-                    0x0000000
+                <div style={{position:'absolute',bottom:'0%', left:'14vw', fontSize:'2.8vw', color:'#ffff00'}}>
+                    {UserActiveTable? getEllipsisTxt(UserActiveTable,5): 0x0000000}
                 </div>
 
                 <div onClick={()=>{setshowPage('home')}} className="backButtonHover" style={{zIndex:'9999', position:'absolute', top:'1vh',left:'5vw',transform:'scale(1.7)',}}>

@@ -16,6 +16,8 @@ function App() {
     const [clickedFinalize, setclickedFinalize] = useState(false);
     const [userErc20TokenBalance, setuserErc20TokenBalance] = useState();
     const [offerTableContractAddress, setofferTableContractAddress] = useState();
+    const [UserActiveTable, setUserActiveTable] = useState();
+    const [UserAllTables, setUserAllTables] = useState();
 
 
 
@@ -24,7 +26,9 @@ function App() {
       showPage, setshowPage,
       clickedFinalize, setclickedFinalize,
       userErc20TokenBalance, setuserErc20TokenBalance,
-      offerTableContractAddress, setofferTableContractAddress
+      offerTableContractAddress, setofferTableContractAddress,
+      UserActiveTable, setUserActiveTable,
+      UserAllTables, setUserAllTables
     };
 
 

@@ -1,5 +1,7 @@
 export const tableFactoryContractAddress = '0x2De69e4733066C1DbbAA2806F5C1a3a50AC63Cc9';
 
+export const baseUrl = 'https://10.0.1.4:3000/table/'; 
+
 export const tableFactoryContractAbi = [
 	{
 		"inputs": [

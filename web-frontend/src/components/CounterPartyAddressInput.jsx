@@ -10,10 +10,9 @@ const CounterPartyAddressInput = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);
     const {offerTableContractAddress, setofferTableContractAddress} = useContext(generalContext);
     const {Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, user, logout} = useMoralis();
-
-    // useEffect(()=>{
-    //     console.log('value: ',props.offerTableContractAddress);
-    // },[props.offerTableContractAddress])
+    const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
+    const {UserAllTables, setUserAllTables} = useContext(generalContext);
+    
 
     const createNewEscrowTable = useWeb3Contract({
         abi: tableFactoryContractAbi,
@@ -23,6 +22,11 @@ const CounterPartyAddressInput = (props) => {
             _counterParty: offerTableContractAddress
         }
       });
+    const getUserTables = useWeb3Contract({
+        abi: tableFactoryContractAbi,
+        contractAddress: tableFactoryContractAddress,
+        functionName: "getMyTables",
+      });
 
 
     function checkInput(target){
@@ -31,18 +35,47 @@ const CounterPartyAddressInput = (props) => {
         }
     }
 
+    useEffect(()=>{
+        if (UserAllTables){
+            // window.location.href = "https://10.0.1.4:3000/table/"+getUserTables.data[getUserTables.data.length-1];
+            window.history.replaceState(null, "COOL BEANS", "/table/"+getUserTables.data[getUserTables.data.length-1])
+            setshowPage('offer');
+        }
+        if (UserActiveTable){
+            setshowPage('offer');
+        }
+    },[UserActiveTable]);
+
+
+    useEffect(()=>{
+        if (getUserTables.data){
+            console.log('latest user table: ',getUserTables.data[getUserTables.data.length-1]); //latest table
+            setUserActiveTable(getUserTables.data[getUserTables.data.length-1]); //is this the best place to trigger this? maybe not..
+            setUserAllTables(getUserTables.data);
+        }
+    },[getUserTables.data]);
+
     function createNewTable(){
         console.log('creating new escrow table. Counter party: ',offerTableContractAddress);
         // setshowPage('offer');
         createNewEscrowTable.runContractFunction({
             onError: (error) =>{
-                console.log('big ERROR: ',error);
+                console.log('web3 error creating new Escrow Table: ',error);
               },
             onSuccess:(tx2)=>tx2.wait().then(newTx2 => {
-            console.log('[ ] tx confirmed: ',newTx2)
+                console.log('tx confirmed: ',newTx2)
+                
+                getUserTables.runContractFunction({
+                    onError: (error) =>{
+                        console.log('web3 error getting User Tables: ',error);
+                      }
+                
+                });
+
+                //getMyTables[getMyTables.length] //get last entry in the array 
             }),
             onComplete: ()=>{
-            console.log('Awaiting confirmation...');
+                console.log('Awaiting confirmation...');
             }
         });
     }
@@ -55,6 +88,7 @@ const CounterPartyAddressInput = (props) => {
 
         <input autoComplete='off' onChange={checkInput} maxLength="42" size="45" placeholder="Paste counter-party address" name="name"  style={{textAlign:'center', zIndex:'9999', width:'80%', height:'5vh', color:'#fff',backgroundColor:'rgba(0,0,0,0.2)',fontSize:'2.5vh', border:'0.5px solid #ccc', borderRadius:'15px', outline:'none'}}></input>
         <div onClick={()=>{createNewTable()}} className="buttonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-110%',}}>
+        {/* <div onClick={()=>{getUserTables.runContractFunction()}} className="buttonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-110%',}}> */}
             Open New Escrow
         </div>
         

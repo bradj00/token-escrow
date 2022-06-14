@@ -5,20 +5,23 @@ import EscrowHistory from './EscrowHistory'
 import Moralis, {useWeb3Contract, useMoralis, MoralisProvider, useERC20Balances} from "react-moralis";
 import {tableFactoryContractAbi, tableFactoryContractAddress} from '../helpers/contractInfo.js';
 import { generalContext } from '../App'
-
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 
 const HomePage = () => {
   const {Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, user, logout} = useMoralis();
   const {offerTableContractAddress, setofferTableContractAddress} = useContext(generalContext);
 
-  // const someCall = useWeb3Contract({
-  //   abi: tableContractAbi,
-  //   contractAddress: offerTableContractAddress,
-  //   functionName: "",
-  //   params: {
+  const location = useLocation();
+  const activeTableDefined = location.pathname.replace('/table/', '');
+  const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
 
-  //   }
-  // });
+  useEffect(()=>{
+    if (activeTableDefined.includes('0x')){
+      console.log('active table is defined in URL: ',activeTableDefined);
+      setUserActiveTable(activeTableDefined);
+      
+    }
+  },[activeTableDefined])
 
   useEffect(()=>{
     if (!isWeb3Enabled){

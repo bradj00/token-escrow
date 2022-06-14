@@ -1,15 +1,20 @@
-import React, {useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import QRCode from "react-qr-code";
+import { generalContext } from '../App'
+import { baseUrl } from '../helpers/contractInfo';
 
 const P2AssetBox = () => {
   const [anyP2Values, setanyP2Values] = useState();
+
+  const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
   return (
     <div style={{display:'flex',justifyContent:'center',}}>
     {!anyP2Values? 
         <div style={{position:'absolute',width:'100%',height:'90%',top:'0',textAlign:'center',paddingTop:'2vh',}}>
-          <QRCode value="some test text" /> 
+          Counter Party:<br></br>
+          <QRCode value={UserActiveTable? baseUrl+UserActiveTable: "something went wrong!"} /> 
           <div style={{}}>
-            Scan QR to load this Table ID
+             Scan QR to load this Table ID
           </div>
         </div>: 
           
