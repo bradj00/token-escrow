@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import '../styles.css'
 import { generalContext } from '../App';
 import { useEffect } from 'react';
-import Moralis, {useWeb3Contract, useMoralis, MoralisProvider, useERC20Balances} from "react-moralis";
+import Moralis, {useWeb3Contract, useWeb3ExecuteFunction, useMoralis, MoralisProvider, useERC20Balances} from "react-moralis";
 import {tableFactoryContractAbi, tableFactoryContractAddress} from '../helpers/contractInfo.js';
 import QrCode2Icon from '@mui/icons-material/QrCode2';
 
@@ -17,7 +17,15 @@ const CounterPartyAddressInput = (props) => {
     const {CreateErrorText, setCreateErrorText} = useContext(generalContext);
     
 
-    const createNewEscrowTable = useWeb3Contract({
+    // const createNewEscrowTable = useWeb3Contract({
+    //     abi: tableFactoryContractAbi,
+    //     contractAddress: tableFactoryContractAddress,
+    //     functionName: "createTable",
+    //     params: {
+    //         _counterParty: offerTableContractAddress
+    //     }
+    //   });
+    const createNewEscrowTable = useWeb3ExecuteFunction  ({
         abi: tableFactoryContractAbi,
         contractAddress: tableFactoryContractAddress,
         functionName: "createTable",
@@ -61,14 +69,14 @@ const CounterPartyAddressInput = (props) => {
     function createNewTable(){
         console.log('creating new escrow table. Counter party: ',offerTableContractAddress);
         // setshowPage('offer');
-        createNewEscrowTable.runContractFunction({
+        createNewEscrowTable.fetch({
             onError: (error) =>{
                 console.log('web3 error creating new Escrow Table: ',error);
-                setCreateErrorText(error);
+                setCreateErrorText(JSON.stringify(error));
               },
             onSuccess:(tx2)=>tx2.wait().then(newTx2 => {
                 console.log('tx confirmed: ',newTx2)
-                setCreateErrorText(newTx2);
+                setCreateErrorText(JSON.stringify(newTx2));
                 getUserTables.runContractFunction({
                     onError: (error) =>{
                         console.log('web3 error getting User Tables: ',error);
