@@ -3,17 +3,17 @@ import QRCode from "react-qr-code";
 import { generalContext } from '../App'
 import { baseUrl } from '../helpers/contractInfo';
 
-const P2AssetBox = () => {
+const P2AssetBox = (props) => {
   const [anyP2Values, setanyP2Values] = useState();
 
   const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
   return (
     <div style={{display:'flex',justifyContent:'center',}}>
-    {!anyP2Values? 
-        <div style={{position:'absolute',width:'100%',height:'90%',top:'0',textAlign:'center',paddingTop:'2vh',}}>
-          Counter Party:<br></br>
+    {!anyP2Values && !props.counterParty? 
+        <div style={{ top:'10%',textAlign:'center',}}>
+          
           <QRCode value={UserActiveTable? baseUrl+UserActiveTable: "something went wrong!"} /> 
-          <div style={{}}>
+          <div style={{paddingTop:'1vh',}}>
              Scan QR to load this Table ID
           </div>
         </div>: 
@@ -27,6 +27,7 @@ const P2AssetBox = () => {
             <div style={{width:'95%',height:'75%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
             
             <table style={{width:'100%'}} >
+            <tbody>
             <tr style={{backgroundColor:'rgba(250,100,100,0.5)',}}>
               <th>Asset</th>
               <th>Token ID</th>
@@ -47,6 +48,7 @@ const P2AssetBox = () => {
               <td>14.6</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
+            </tbody>
         </table>
 
             </div>
@@ -59,6 +61,7 @@ const P2AssetBox = () => {
             <div style={{width:'95%',height:'75%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
 
             <table style={{width:'100%'}} >
+            <tbody>
             <tr style={{backgroundColor:'rgba(250,100,100,0.5)',}}>
               <th>Asset</th>
               <th>Token ID</th>
@@ -79,6 +82,7 @@ const P2AssetBox = () => {
               <td>14.6</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
+            </tbody>
         </table>
 
             </div>

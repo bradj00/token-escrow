@@ -7,37 +7,87 @@ import P1AssetBox from './P1AssetBox';
 import P2AssetBox from './P2AssetBox';
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import {getEllipsisTxt} from "../helpers/formatters";
-
-
+import { tableContractAbi } from '../helpers/contractInfo';
+import { useWeb3Contract,useMoralis, } from 'react-moralis';
 
 const OfferTable = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);
     const {clickedFinalize, setclickedFinalize} = useContext(generalContext);
+    const {isWeb3Enabled,account} = useMoralis();
 
     const location = useLocation();
     const something = location.pathname.replace('/', '');
     const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
     
+    const [counterParty, setcounterParty] = useState(false);
+    const [tableCreator, settableCreator] = useState(false);
+
     useEffect(()=>{
         console.log('table ID is: ',something);
     },[something])
+
+    useEffect(()=>{
+        if (isWeb3Enabled){
+            getBothParties.runContractFunction({
+                onError: (error) =>{
+                    console.log('big ERROR: ',error);
+                    }
+            });
+        }
+    },[isWeb3Enabled]);
+    
+    const getBothParties = useWeb3Contract({
+        abi: tableContractAbi,
+        contractAddress: UserActiveTable,
+        functionName: "getParties",
+      });
+
+    useEffect(()=>{
+        if (getBothParties.data && account){
+            // console.log('p1 and p2: ',getBothParties.data);
+            if (getBothParties.data[1].toLowerCase() == account){
+                console.log('we are the counter-party!');
+                //set TRUE
+                setcounterParty(true);
+            }else {
+                setcounterParty(false);
+            }
+
+            if (getBothParties.data[0].toLowerCase() == account){
+                console.log('we are the table creator!');
+                //set TRUE
+                settableCreator(true);
+            }else {
+                settableCreator(false);
+            }
+        }
+    },[getBothParties.data, account])
+
+
+    function goBackHome(){
+        console.log('before: ',location.pathname);
+        location.pathname = '';
+        console.log('after: ',location.pathname);
+        setUserActiveTable();
+        setshowPage('home');
+    }
     return (
-        <div style={{display:'flex', justifyContent:'center', position:'absolute', width:'100%', height:'100%', zIndex:'9999'}}>
+        <div style={{display:'flex', justifyContent:'center', position:'absolute', width:'100%', height:'100vh', zIndex:'9999'}}>
             <div style={{overflow:'hidden', zIndex:'0',  display:'flex', justifyContent:'right', right:'0vw', top:'0vh', color:'#fff', zIndex:'9999', position:'absolute',width:'100%', fontSize:'3vh', userSelect:'none'}}>
-                <div style={{marginRight:'-32vw', zIndex:'-1', position:'absolute', width:'100%', height:'100%', transform:'skew(-15deg,-15deg) rotateZ(15deg)', backgroundColor:'#0066ff',}}>
+                <div style={{marginRight:'-32vw', zIndex:'-1', position:'absolute', width:'100%', height:'100vh', transform:'skew(-15deg,-15deg) rotateZ(15deg)', backgroundColor:'#0066ff',}}>
                 </div>
 
-                <div style={{ zIndex:'-1', left:'-10.5vw', position:'absolute', width:'50%', height:'100%', transform:'skew(-15deg,-15deg) rotateZ(15deg)', backgroundColor:'#0033bb',}}>
+                <div style={{ zIndex:'-1', left:'-10.5vw', position:'absolute', width:'50%', height:'100vh', transform:'skew(-15deg,-15deg) rotateZ(15deg)', backgroundColor:'#0033bb',}}>
                 </div>
                 
                 <div style={{position:'absolute',top:'-5%', left:'14vw', fontSize:'70%'}}>
                     Table ID
                 </div>
-                <div style={{position:'absolute',bottom:'0%', left:'14vw', fontSize:'2.8vw', color:'#ffff00'}}>
+                <div style={{position:'absolute',bottom:'0%', left:'14vw', fontSize:'1.5vh', color:'#ffff00'}}>
                     {UserActiveTable? getEllipsisTxt(UserActiveTable,5): 0x0000000}
                 </div>
 
-                <div onClick={()=>{setshowPage('home')}} className="backButtonHover" style={{zIndex:'9999', position:'absolute', top:'1vh',left:'5vw',transform:'scale(1.7)',}}>
+                <div onClick={()=>{goBackHome();}} className="backButtonHover" style={{zIndex:'9999', position:'absolute', top:'1vh',left:'5vw',transform:'scale(1.7)',}}>
                     <BackspaceIcon />
                 </div>
                 
@@ -54,8 +104,8 @@ const OfferTable = (props) => {
 
             
             </div>
-            <div style={{userSelect:'none',border: '1px solid #999', position:'absolute', height:'40%', width:'95%',top:'8%', backgroundColor:'rgba(50,50,50,0.9)', borderRadius:'5px', padding:'1vw',display:'flex', justifyContent:'center', alignItems:'center', color:'#fff'}}>
-                <P1AssetBox />
+            <div style={{userSelect:'none',border: '1px solid #999', position:'absolute', height:'40vh', width:'95vw',top:'8vh', backgroundColor:'rgba(50,50,50,0.9)', borderRadius:'5px', padding:'0.5vh',display:'flex', justifyContent:'center', alignItems:'center', color:'#fff'}}>
+                <P1AssetBox tableCreator={tableCreator}/>
             </div>
             <div onClick={()=>{setclickedFinalize(true)}} className="ejectButtonWithHover" style={{fontSize:'5vh', padding:'0.1vh', paddingLeft:'2vh', paddingRight:'2vh', position:'absolute', left:'12%', top:'50%',}}>
                 Eject
@@ -63,8 +113,8 @@ const OfferTable = (props) => {
             <div onClick={()=>{setclickedFinalize(true)}} className="finalizeButtonWithHover" style={{fontSize:'5vh', padding:'0.1vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', right:'16%', top:'50%',}}>
                 Finalize
             </div>
-            <div style={{userSelect:'none',border: '1px solid #ff1155',position:'absolute', height:'40%', width:'95%',bottom:'1%', backgroundColor:'rgba(50,50,50,0.9)', borderRadius:'5px', padding:'1vw',display:'flex', justifyContent:'center', alignItems:'center', color:'#fff'}}>
-                <P2AssetBox />
+            <div style={{userSelect:'none',border: '1px solid #ff1155',position:'absolute', height:'40vh', width:'95vw',bottom:'1vh', backgroundColor:'rgba(50,50,50,0.9)', borderRadius:'5px', padding:'0.5vh',display:'flex', justifyContent:'center', alignItems:'center', color:'#fff'}}>
+                <P2AssetBox counterParty={counterParty}/>
             </div>
         </div>
     )

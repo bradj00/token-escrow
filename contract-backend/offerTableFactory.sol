@@ -24,6 +24,7 @@ contract offerTableFactory {
     function getMyTables() public view returns (offerTable[] memory){
         return TablesByOwner[msg.sender];
     }
+    
     function allTables() public view returns (offerTable[] memory){
         return _tables;
     }

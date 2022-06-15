@@ -7,7 +7,7 @@ import { useERC20Balances, useMoralis } from "react-moralis";
 import { useEffect } from 'react';
 import TheUserErc20Balances from './sub-components/TheUserErc20Balances';
 
-const P1AssetBox = () => {
+const P1AssetBox = (props) => {
   const {Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, account, user, logout} = useMoralis();
  
   const {clickedFinalize, setclickedFinalize}             = useContext(generalContext);
@@ -47,6 +47,7 @@ const P1AssetBox = () => {
           <div style={{width:'83%',height:'75%',left:'1%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
      
           <table style={{width:'100%'}} >
+            <tbody>
             <tr style={{backgroundColor:'rgba(100,100,250,0.5)',}}>
               <th>Asset</th>
               <th>Amount</th>
@@ -67,6 +68,7 @@ const P1AssetBox = () => {
               <td>14.6</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
+            </tbody>
         </table>
 
           </div>
@@ -78,6 +80,7 @@ const P1AssetBox = () => {
           <div style={{width:'83%',height:'75%',left:'1%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
 
           <table style={{width:'100%'}} >
+            <tbody>
             <tr style={{backgroundColor:'rgba(100,100,250,0.5)',}}>
               <th>Asset</th>
               <th>Token ID</th>
@@ -98,6 +101,7 @@ const P1AssetBox = () => {
               <td>14.6</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
+            </tbody>
         </table>
 
           </div>
@@ -121,6 +125,8 @@ const P1AssetBox = () => {
             
 
         </div>
+        {props.tableCreator?
+        <>
             <div onClick={()=>{setdisplayUserErc20Assets(!displayUserErc20Assets)}} className="addAssetButton" style={{position:'absolute', top:'10vh',transform:'scale(3)', right:'5%'}}>
             <AddBoxIcon />
             </div>
@@ -128,7 +134,8 @@ const P1AssetBox = () => {
             <div className="addAssetButton" style={{position:'absolute', top:'30vh',transform:'scale(3)', right:'5%'}}>
             <AddBoxIcon />
             </div>
-
+        </>:
+        <></>}
         
         
     </div>
