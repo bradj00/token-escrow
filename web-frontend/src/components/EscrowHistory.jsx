@@ -3,9 +3,11 @@ import QRCode from 'react-qr-code'
 import { generalContext } from '../App'
 import {useMoralis} from 'react-moralis'
 
+
+
 //CHANGE THE NAME OF THIS COMPONENT TO MATCH QR CODE. WE UPDATED THIS COMPONENTS USE CASE...
 const EscrowHistory = () => {
-
+  const {CreateErrorText, setCreateErrorText} = useContext(generalContext);
   const {account} = useMoralis();
   return (
     <div style={{userSelect:'none', position:'absolute', bottom:'32%', width:'100%', display:'flex', justifyContent:'center', color: '#fff', fontSize:'4vh', zIndex:'9999',}}>
@@ -24,9 +26,8 @@ const EscrowHistory = () => {
                     
                     <div>&nbsp;</div>
                     <div>&nbsp;</div>
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
+                    <div>{CreateErrorText? CreateErrorText: <>no errors to display</>}</div>
+
 
                 </div>
             </div>

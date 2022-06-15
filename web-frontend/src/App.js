@@ -21,8 +21,9 @@ function App() {
     const [displayUserErc20Assets, setdisplayUserErc20Assets] = useState();
     const [counterPartyAddress, setcounterPartyAddress] = useState();
     const [showCounterPartyScanner, setshowCounterPartyScanner] = useState();
+    const [CreateErrorText, setCreateErrorText] = useState();
 
-
+    
 
 
     const contextObj = {
@@ -35,6 +36,7 @@ function App() {
       displayUserErc20Assets, setdisplayUserErc20Assets,
       counterPartyAddress, setcounterPartyAddress,
       showCounterPartyScanner, setshowCounterPartyScanner,
+      CreateErrorText, setCreateErrorText,
     };
 
 
