@@ -11,7 +11,7 @@ import { tableContractAbi } from '../helpers/contractInfo';
 import { useWeb3Contract,useMoralis, } from 'react-moralis';
 import TheUserErc20Balances from './sub-components/TheUserErc20Balances';
 import WarningIcon from '@mui/icons-material/Warning';
-import '../styles.css';
+import '../styles.css'
 
 const OfferTable = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);

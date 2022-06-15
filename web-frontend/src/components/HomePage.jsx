@@ -6,6 +6,7 @@ import Moralis, {useWeb3Contract, useMoralis, MoralisProvider, useERC20Balances}
 import {tableFactoryContractAbi, tableFactoryContractAddress} from '../helpers/contractInfo.js';
 import { generalContext } from '../App'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
+import ReadQrCodePasteCounterParty from './ReadQrCodePasteCounterParty';
 
 const HomePage = () => {
   const {Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, user, logout} = useMoralis();
@@ -14,7 +15,7 @@ const HomePage = () => {
   const location = useLocation();
   const activeTableDefined = location.pathname.replace('/table/', '');
   const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
-
+  const {showCounterPartyScanner, setshowCounterPartyScanner} = useContext(generalContext);
 
   useEffect(()=>{
     if (activeTableDefined.includes('0x')){
@@ -35,10 +36,14 @@ const HomePage = () => {
 
   return (
     <div>
+      {showCounterPartyScanner?
+      <ReadQrCodePasteCounterParty />
+      :
+      <>
         <AccountTitle />
         <CounterPartyAddressInput offerTableContractAddress={offerTableContractAddress} setofferTableContractAddress={setofferTableContractAddress}/>
         <EscrowHistory />
-
+      </>}
     </div>
   )
 }

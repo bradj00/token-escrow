@@ -19,6 +19,8 @@ function App() {
     const [UserActiveTable, setUserActiveTable] = useState();
     const [UserAllTables, setUserAllTables] = useState();
     const [displayUserErc20Assets, setdisplayUserErc20Assets] = useState();
+    const [counterPartyAddress, setcounterPartyAddress] = useState();
+    const [showCounterPartyScanner, setshowCounterPartyScanner] = useState();
 
 
 
@@ -31,6 +33,8 @@ function App() {
       UserActiveTable, setUserActiveTable,
       UserAllTables, setUserAllTables,
       displayUserErc20Assets, setdisplayUserErc20Assets,
+      counterPartyAddress, setcounterPartyAddress,
+      showCounterPartyScanner, setshowCounterPartyScanner,
     };
 
 

@@ -1,19 +1,19 @@
-import React from 'react'
+import React, {useEffect, useContext} from 'react'
+import QRCode from 'react-qr-code'
+import { generalContext } from '../App'
+import {useMoralis} from 'react-moralis'
 
+//CHANGE THE NAME OF THIS COMPONENT TO MATCH QR CODE. WE UPDATED THIS COMPONENTS USE CASE...
 const EscrowHistory = () => {
+
+  const {account} = useMoralis();
   return (
     <div style={{userSelect:'none', position:'absolute', bottom:'32%', width:'100%', display:'flex', justifyContent:'center', color: '#fff', fontSize:'4vh', zIndex:'9999',}}>
-        <div style={{textAlign:'center',position:'absolute', bottom:'-2vh',display:'flex', justifyContent:'center', alignItems:'center'}}>
-            <div style={{fontSize:'2vh',position:'absolute', }}>
-                QR Code of my wallet address goes here
-            </div>
-            <div style={{backgroundColor:'rgba(255,255,255,0.1)', borderRadius:'5px', textAlign:'left', width:'95vw',height:'25vh',}}>
-                <div style={{padding:'2vh',fontSize:'2.5vh',}}>
-
-                    
-                </div>
-            </div>
+        
+        <div style={{fontSize:'2vh',position:'fixed', top:'43vh',border:'2px solid #00ff00'}}>
+            <QRCode value={account? account: "something went wrong!"} /> 
         </div>
+        
         
         <div style={{textAlign:'center',position:'absolute',bottom:'-31vh',display:'flex', justifyContent:'center'}}>
             <div style={{fontSize:'2vh',position:'absolute', top:'0.1vh',}}>

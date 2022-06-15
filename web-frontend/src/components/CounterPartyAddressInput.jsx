@@ -10,8 +10,10 @@ const CounterPartyAddressInput = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);
     const {offerTableContractAddress, setofferTableContractAddress} = useContext(generalContext);
     const {Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, user, logout} = useMoralis();
-    const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
-    const {UserAllTables, setUserAllTables} = useContext(generalContext);
+    const {UserActiveTable, setUserActiveTable}                 = useContext(generalContext);
+    const {UserAllTables, setUserAllTables}                     = useContext(generalContext);
+    const {counterPartyAddress, setcounterPartyAddress}         = useContext(generalContext);
+    const {showCounterPartyScanner, setshowCounterPartyScanner} = useContext(generalContext);
     
 
     const createNewEscrowTable = useWeb3Contract({
@@ -85,14 +87,14 @@ const CounterPartyAddressInput = (props) => {
         <div style={{position:'absolute', width:'90%',marginTop:'-2vh',borderRadius:'10px', height:'250%', backgroundColor:'rgba(40,40,120,0.4)',zIndex:'9999', border:'1px solid #666'}}>
         
         </div>
-        <div className="scanButtonHover" style={{fontSize:'1vw',textAlign:'center', position:'absolute',zIndex:'9999',right:'10vw',bottom:'25%',transform:'scale(2)'}}>
+        <div className="scanButtonHover" onClick={()=>{setshowCounterPartyScanner(!showCounterPartyScanner)}} style={{fontSize:'1vw',textAlign:'center', position:'absolute',zIndex:'9999',right:'10vw',bottom:'25%',transform:'scale(2)'}}>
             <div>
                 <QrCode2Icon /><br></br>
                 SCAN
             </div>
         </div>
 
-        <input autoComplete='off' onChange={checkInput} maxLength="42" size="45" placeholder="Paste counter-party address" name="name"  style={{textAlign:'center', zIndex:'9999', width:'70%',marginRight:'15vw', height:'5vh', color:'#fff',backgroundColor:'rgba(0,0,0,0.2)',fontSize:'2.5vh', border:'0.5px solid #ccc', borderRadius:'15px', outline:'none'}}></input>
+        <input autoComplete='off' onChange={checkInput} value={counterPartyAddress} maxLength="42" size="45" placeholder="Paste counter-party address" name="name"  style={{textAlign:'center', zIndex:'9999', width:'70%',marginRight:'15vw', height:'5vh', color:'#fff',backgroundColor:'rgba(0,0,0,0.2)',fontSize:'2.5vh', border:'0.5px solid #ccc', borderRadius:'15px', outline:'none'}}></input>
         
         <div onClick={()=>{createNewTable()}} className="buttonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-110%',}}>       
             Open New Escrow
