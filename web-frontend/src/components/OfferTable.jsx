@@ -9,16 +9,19 @@ import { useNavigate, useLocation, Link } from 'react-router-dom'
 import {getEllipsisTxt} from "../helpers/formatters";
 import { tableContractAbi } from '../helpers/contractInfo';
 import { useWeb3Contract,useMoralis, } from 'react-moralis';
+import TheUserErc20Balances from './sub-components/TheUserErc20Balances';
+import WarningIcon from '@mui/icons-material/Warning';
+import '../styles.css';
 
 const OfferTable = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);
     const {clickedFinalize, setclickedFinalize} = useContext(generalContext);
     const {isWeb3Enabled,account} = useMoralis();
-
+    const {displayUserErc20Assets, setdisplayUserErc20Assets} = useContext(generalContext);
     const location = useLocation();
     const something = location.pathname.replace('/', '');
     const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
-    
+    const {userErc20TokenBalance, setuserErc20TokenBalance}   = useContext(generalContext);
     const [counterParty, setcounterParty] = useState(false);
     const [tableCreator, settableCreator] = useState(false);
 
@@ -72,7 +75,32 @@ const OfferTable = (props) => {
         setshowPage('home');
     }
     return (
+        <div style={{position:'absolute', width:'100%', height:'100%',display:'flex', justifyContent:'center',alignItems:'center'}}>
+        <div className={clickedFinalize?"confirmationBox":"hiddenConfirmationbox"} style={{borderRadius:'5px',  border:'1px solid rgba(153, 21, 121, 1)', zIndex:'10000', display:'flex', justifyContent:'center', alignItems:'center', position:'absolute',width:'85vw', height:'60vh', backgroundColor:'rgba(23, 21, 121, 1)'}}>
+            <div onClick={()=>{setclickedFinalize(false)}} className="finalizeButtonWithHover" style={{ padding:'1.5vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', top:'1%',right:'1%',}}>
+                X
+            </div>
+            <div style={{position:'absolute', top:'5vh',transform:'scale(4)', color:'yellow'}}>
+            <WarningIcon />
+            </div>
+            <div style={{userSelect:'none', fontSize:'3vh', color:'#fff', textAlign:'center', position:'absolute', width:'95%', height:'60%', backgroundColor:'rgba(0,0,0,0.2)',borderRadius:'5px',padding:'1vw'}}>
+            Review the trade <br></br><span style={{color:"#ff0000"}}>VERY CAREFULLY.</span><br></br> Refresh the page to ensure data is current before accepting! <br></br><br></br>Click the button below to confirm you are satisfied with how the trade appears.  
+            </div>
+
+            <div className="finalizeButtonWithHover" style={{fontSize:'4vh', display:'flex', justifyContent:'center', alignItems:'center', position:'absolute',bottom:'3vh', width:'40%', height:'10%'}}>
+            Confirm
+            </div>
+            
+
+        </div>
         <div style={{display:'flex', justifyContent:'center', position:'absolute', width:'100%', height:'100vh', zIndex:'9999'}}>
+           
+            {displayUserErc20Assets ? 
+            <div className="confirmationBox" style={{zIndex:'9999',color:'#fff',fontSize:'3vh', position:'fixed', top:'5vh', display:'flex', textAlign:'center', justifyContent:'center', alignItems:'center', width:'100%',height:'100vh', zIndex:'9999',backgroundColor:'rgba(40, 38, 120, 1)',border:'1px solid #0088ff',borderRadius:'5px'}}>
+                <TheUserErc20Balances userErc20TokenBalance={userErc20TokenBalance} displayUserErc20Assets={displayUserErc20Assets} setdisplayUserErc20Assets={setdisplayUserErc20Assets}/>
+            </div>
+            :<></>}
+            
             <div style={{overflow:'hidden', zIndex:'0',  display:'flex', justifyContent:'right', right:'0vw', top:'0vh', color:'#fff', zIndex:'9999', position:'absolute',width:'100%', fontSize:'3vh', userSelect:'none'}}>
                 <div style={{marginRight:'-32vw', zIndex:'-1', position:'absolute', width:'100%', height:'100vh', transform:'skew(-15deg,-15deg) rotateZ(15deg)', backgroundColor:'#0066ff',}}>
                 </div>
@@ -102,6 +130,8 @@ const OfferTable = (props) => {
                     party2.eth
                 </div>
 
+
+
             
             </div>
             <div style={{userSelect:'none',border: '1px solid #999', position:'absolute', height:'40vh', width:'95vw',top:'8vh', backgroundColor:'rgba(50,50,50,0.9)', borderRadius:'5px', padding:'0.5vh',display:'flex', justifyContent:'center', alignItems:'center', color:'#fff'}}>
@@ -116,6 +146,7 @@ const OfferTable = (props) => {
             <div style={{userSelect:'none',border: '1px solid #ff1155',position:'absolute', height:'40vh', width:'95vw',bottom:'1vh', backgroundColor:'rgba(50,50,50,0.9)', borderRadius:'5px', padding:'0.5vh',display:'flex', justifyContent:'center', alignItems:'center', color:'#fff'}}>
                 <P2AssetBox counterParty={counterParty}/>
             </div>
+        </div>
         </div>
     )
     

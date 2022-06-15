@@ -18,6 +18,7 @@ function App() {
     const [offerTableContractAddress, setofferTableContractAddress] = useState();
     const [UserActiveTable, setUserActiveTable] = useState();
     const [UserAllTables, setUserAllTables] = useState();
+    const [displayUserErc20Assets, setdisplayUserErc20Assets] = useState();
 
 
 
@@ -28,7 +29,8 @@ function App() {
       userErc20TokenBalance, setuserErc20TokenBalance,
       offerTableContractAddress, setofferTableContractAddress,
       UserActiveTable, setUserActiveTable,
-      UserAllTables, setUserAllTables
+      UserAllTables, setUserAllTables,
+      displayUserErc20Assets, setdisplayUserErc20Assets,
     };
 
 
