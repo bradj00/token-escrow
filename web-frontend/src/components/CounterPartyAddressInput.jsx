@@ -71,24 +71,27 @@ const CounterPartyAddressInput = (props) => {
         // setshowPage('offer');
         createNewEscrowTable.fetch({
             onError: (error) =>{
-                console.log('web3 error creating new Escrow Table: ',error);
-                setCreateErrorText(JSON.stringify(error));
+                alert('web3 error creating new Escrow Table: ',error);
+                // console.log('web3 error creating new Escrow Table: ',error);
+                // setCreateErrorText(JSON.stringify(error));
               },
             onSuccess:(tx2)=>tx2.wait().then(newTx2 => {
-                console.log('tx confirmed: ',newTx2)
-                setCreateErrorText(JSON.stringify(newTx2));
-                getUserTables.runContractFunction({
-                    onError: (error) =>{
-                        console.log('web3 error getting User Tables: ',error);
-                      }
+                alert('tx confirmed: ',newTx2)
+                // console.log('tx confirmed: ',newTx2)
+                // setCreateErrorText(JSON.stringify(newTx2));
+                // getUserTables.runContractFunction({
+                //     onError: (error) =>{
+                //         console.log('web3 error getting User Tables: ',error);
+                //       }
                 
-                });
+                // });
 
                 //getMyTables[getMyTables.length] //get last entry in the array 
             }),
             onComplete: ()=>{
-                console.log('Awaiting confirmation...');
-                setCreateErrorText('Awaiting confirmation...');
+                alert('Awaiting confirmation...');
+                // console.log('Awaiting confirmation...');
+                // setCreateErrorText('Awaiting confirmation...');
             }
         });
     }
