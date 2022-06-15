@@ -59,6 +59,15 @@ const CounterPartyAddressInput = (props) => {
 
 
     useEffect(()=>{
+        if (counterPartyAddress){
+            props.setofferTableContractAddress(counterPartyAddress);
+            alert('....updating variable...');
+            
+        }
+    },[counterPartyAddress]);
+
+
+    useEffect(()=>{
         if (getUserTables.data){
             console.log('latest user table: ',getUserTables.data[getUserTables.data.length-1]); //latest table
             setUserActiveTable(getUserTables.data[getUserTables.data.length-1]); //is this the best place to trigger this? maybe not..
