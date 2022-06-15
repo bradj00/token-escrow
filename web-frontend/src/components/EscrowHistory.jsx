@@ -20,6 +20,7 @@ const EscrowHistory = () => {
         <div style={{textAlign:'center',position:'absolute',bottom:'-31vh',display:'flex', justifyContent:'center'}}>
             <div style={{fontSize:'2vh',position:'absolute', top:'0.1vh',}}>
                 Escrow History
+                {/* This should be a pull out side menu... */}
             </div>
             <div style={{backgroundColor:'rgba(255,255,255,0.1)', borderRadius:'5px', textAlign:'left', width:'95vw',height:'25vh',}}>
                 <div style={{padding:'2vh',fontSize:'2.5vh',}}>

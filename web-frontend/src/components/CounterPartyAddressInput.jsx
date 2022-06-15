@@ -14,6 +14,7 @@ const CounterPartyAddressInput = (props) => {
     const {UserAllTables, setUserAllTables}                     = useContext(generalContext);
     const {counterPartyAddress, setcounterPartyAddress}         = useContext(generalContext);
     const {showCounterPartyScanner, setshowCounterPartyScanner} = useContext(generalContext);
+    const {CreateErrorText, setCreateErrorText} = useContext(generalContext);
     
 
     const createNewEscrowTable = useWeb3Contract({
@@ -63,10 +64,11 @@ const CounterPartyAddressInput = (props) => {
         createNewEscrowTable.runContractFunction({
             onError: (error) =>{
                 console.log('web3 error creating new Escrow Table: ',error);
+                setCreateErrorText(error);
               },
             onSuccess:(tx2)=>tx2.wait().then(newTx2 => {
                 console.log('tx confirmed: ',newTx2)
-                
+                setCreateErrorText(newTx2);
                 getUserTables.runContractFunction({
                     onError: (error) =>{
                         console.log('web3 error getting User Tables: ',error);
@@ -78,6 +80,7 @@ const CounterPartyAddressInput = (props) => {
             }),
             onComplete: ()=>{
                 console.log('Awaiting confirmation...');
+                setCreateErrorText('Awaiting confirmation...');
             }
         });
     }

@@ -16,7 +16,7 @@ const HomePage = () => {
   const activeTableDefined = location.pathname.replace('/table/', '');
   const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
   const {showCounterPartyScanner, setshowCounterPartyScanner} = useContext(generalContext);
-
+  const {CreateErrorText, setCreateErrorText} = useContext(generalContext);
   useEffect(()=>{
     if (activeTableDefined.includes('0x')){
       console.log('active table is defined in URL: ',activeTableDefined);
@@ -28,8 +28,9 @@ const HomePage = () => {
   useEffect(()=>{
     if (!isWeb3Enabled){
       enableWeb3();
+      setCreateErrorText('enabling web3...')
     }else {
-
+      setCreateErrorText(JSON.stringify(isWeb3Enabled))
     }
   },[isWeb3Enabled])
 
