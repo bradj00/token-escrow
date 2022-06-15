@@ -10,7 +10,7 @@ const EscrowHistory = () => {
   return (
     <div style={{userSelect:'none', position:'absolute', bottom:'32%', width:'100%', display:'flex', justifyContent:'center', color: '#fff', fontSize:'4vh', zIndex:'9999',}}>
         
-        <div style={{fontSize:'2vh',position:'fixed', top:'43vh',border:'2px solid #00ff00'}}>
+        <div style={{fontSize:'2vh',position:'fixed', top:'43vh',zIndex:'9999', border:'2px solid #00ff00'}}>
             <QRCode value={account? account: "something went wrong!"} /> 
         </div>
         
