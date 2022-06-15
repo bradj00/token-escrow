@@ -71,7 +71,9 @@ const CounterPartyAddressInput = (props) => {
         // setshowPage('offer');
         createNewEscrowTable.fetch({
             onError: (error) =>{
-                alert('web3 error creating new Escrow Table: ',error);
+                alert('web3 error creating new Escrow Table: ');
+                alert(error);
+                alert('...');
                 // console.log('web3 error creating new Escrow Table: ',error);
                 // setCreateErrorText(JSON.stringify(error));
               },
