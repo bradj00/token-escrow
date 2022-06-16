@@ -21,12 +21,12 @@ const P2AssetBox = (props) => {
 
     <div style={{display:'flex',justifyContent:'center',}}>
     {!anyP2Values && !props.counterParty? 
-        <div style={{ top:'10%',textAlign:'center',}}>
+        <div style={{border:'2px solid #fff', top:'10%',textAlign:'center',}}>
           
-          <QRCode value={UserActiveTable? baseUrl+UserActiveTable: "something went wrong!"} /> 
-          <div style={{paddingTop:'1vh',}}>
+          <QRCode size={185} value={UserActiveTable? baseUrl+UserActiveTable: "something went wrong!"} /> 
+          {/* <div style={{paddingTop:'1vh',}}>
              Scan QR to load this Table ID
-          </div>
+          </div> */}
         </div>: 
           
         <div>
