@@ -14,6 +14,8 @@ const CounterPartyAddressInput = (props) => {
     const {UserAllTables, setUserAllTables}                     = useContext(generalContext);
     const {counterPartyAddress, setcounterPartyAddress}         = useContext(generalContext);
     const {showCounterPartyScanner, setshowCounterPartyScanner} = useContext(generalContext);
+    const {refreshUserEscrowTables, setrefreshUserEscrowTables} = useContext(generalContext);
+
     const {CreateErrorText, setCreateErrorText} = useContext(generalContext);
     
 
@@ -88,6 +90,7 @@ const CounterPartyAddressInput = (props) => {
               },
             onSuccess:(tx2)=>tx2.wait().then(newTx2 => {
                 alert('tx confirmed: ',newTx2)
+                setrefreshUserEscrowTables(true);
                 // console.log('tx confirmed: ',newTx2)
                 // setCreateErrorText(JSON.stringify(newTx2));
                 // getUserTables.runContractFunction({
@@ -110,15 +113,15 @@ const CounterPartyAddressInput = (props) => {
     return (
     <div style={{display:'flex',justifyContent:'center', position:'absolute',top:'15%', width:'100%',color:'#fff', paddingTop:'0.5vh', height:'6vh',}}>
         <div style={{position:'absolute', width:'95%',marginTop:'-2vh',borderRadius:'10px', height:'250%', backgroundColor:'rgba(40,40,120,0.4)',zIndex:'9999', border:'1px solid #666'}}>
-            <div className="scanButtonHover" onClick={()=>{setshowCounterPartyScanner(!showCounterPartyScanner)}} style={{fontSize:'1vw',textAlign:'center', position:'absolute',zIndex:'9999',right:'2%',top:'15%',transform:'scale(2)'}}>
+            <div className="scanButtonHover" onClick={()=>{setshowCounterPartyScanner(!showCounterPartyScanner)}} style={{fontSize:'1vh',textAlign:'center', position:'absolute',zIndex:'9999',right:'1vw',top:'1.5vh',}}>
                 <div>
-                    <QrCode2Icon /><br></br>
+                    <QrCode2Icon style={{fontSize:'3vh'}}/><br></br>
                     SCAN
                 </div>
             </div>
         
 
-        <input autoComplete='off' onChange={checkInput} value={counterPartyAddress} maxLength="42" size="45" placeholder="Paste counter-party address" name="name"  style={{position:'absolute', textAlign:'center',left:'1%', top:'5%',zIndex:'9999', width:'92%', height:'5vh', color:'#fff',backgroundColor:'rgba(0,0,0,0.2)',fontSize:'2.5vh', border:'0.5px solid #ccc', borderRadius:'15px', outline:'none'}}></input>
+        <input autoComplete='off' onChange={checkInput} value={counterPartyAddress} maxLength="42" size="45" placeholder="Paste counter-party address" name="name"  style={{position:'absolute', textAlign:'center',left:'1%', top:'5%',zIndex:'9999', width:'90%', height:'5vh', color:'#fff',backgroundColor:'rgba(0,0,0,0.2)',fontSize:'2.5vh', border:'0.5px solid #ccc', borderRadius:'15px', outline:'none'}}></input>
 
         </div>
 

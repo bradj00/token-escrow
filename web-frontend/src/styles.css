@@ -148,3 +148,13 @@
     filter:opacity(1);
     cursor: pointer;
   }
+
+  .hiddenscroll::-webkit-scrollbar{
+    display: none;
+  }
+
+  .tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 9999; 
+    }

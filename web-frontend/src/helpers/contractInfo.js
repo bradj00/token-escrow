@@ -1,47 +1,8 @@
-export const tableFactoryContractAddress = '0x2De69e4733066C1DbbAA2806F5C1a3a50AC63Cc9';
+export const tableFactoryContractAddress = '0xd74E091e2EA7AbC94E37B9F07c87E8a710a87545';
 
 export const baseUrl = 'https://10.0.1.4:3000/table/'; 
 
 export const tableFactoryContractAbi = [
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_counterParty",
-				"type": "address"
-			}
-		],
-		"name": "createTable",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "allTables",
-		"outputs": [
-			{
-				"internalType": "contract offerTable[]",
-				"name": "",
-				"type": "address[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getMyTables",
-		"outputs": [
-			{
-				"internalType": "contract offerTable[]",
-				"name": "",
-				"type": "address[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
 	{
 		"inputs": [
 			{
@@ -59,8 +20,76 @@ export const tableFactoryContractAbi = [
 		"outputs": [
 			{
 				"internalType": "contract offerTable",
-				"name": "",
+				"name": "OT",
 				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "CP",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "allTables",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "contract offerTable",
+						"name": "OT",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "CP",
+						"type": "address"
+					}
+				],
+				"internalType": "struct offerTableFactory.thisStruct[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_counterParty",
+				"type": "address"
+			}
+		],
+		"name": "createTable",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getMyTables",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "contract offerTable",
+						"name": "OT",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "CP",
+						"type": "address"
+					}
+				],
+				"internalType": "struct offerTableFactory.thisStruct[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",

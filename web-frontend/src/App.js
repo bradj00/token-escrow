@@ -22,6 +22,7 @@ function App() {
     const [counterPartyAddress, setcounterPartyAddress] = useState();
     const [showCounterPartyScanner, setshowCounterPartyScanner] = useState();
     const [CreateErrorText, setCreateErrorText] = useState();
+    const [refreshUserEscrowTables, setrefreshUserEscrowTables] = useState(false);
 
     
 
@@ -37,6 +38,7 @@ function App() {
       counterPartyAddress, setcounterPartyAddress,
       showCounterPartyScanner, setshowCounterPartyScanner,
       CreateErrorText, setCreateErrorText,
+      refreshUserEscrowTables, setrefreshUserEscrowTables,
     };
 
 
