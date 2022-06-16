@@ -158,3 +158,13 @@
     top: 0;
     z-index: 9999; 
     }
+
+  .hoverOpenTable{
+    filter: opacity(0.7);
+    cursor: pointer;
+  }
+
+  .hoverOpenTable:hover{
+    filter: opacity(1);
+    cursor: pointer;
+  }

@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from 'react'
 import AccountTitle from './AccountTitle'
 import CounterPartyAddressInput from './CounterPartyAddressInput'
-import EscrowHistory from './EscrowHistory'
+import OpenEscrowTables from './OpenEscrowTables'
 import Moralis, {useWeb3Contract, useMoralis, MoralisProvider, useERC20Balances} from "react-moralis";
 import {tableFactoryContractAbi, tableFactoryContractAddress} from '../helpers/contractInfo.js';
 import { generalContext } from '../App'
@@ -46,11 +46,11 @@ const HomePage = () => {
         <AccountTitle />
         <CounterPartyAddressInput offerTableContractAddress={offerTableContractAddress} setofferTableContractAddress={setofferTableContractAddress}/>
 
-        <div style={{fontSize:'2vh',position:'absolute', top:'44vh', zIndex:'9999', border:'2px solid #00ff00'}}>
+        <div style={{fontSize:'2vh',position:'absolute', top:'44vh',color:'#fff', zIndex:'9999', border:'2px solid #fff'}}>
             <QRCode size={160} value={account? account: "something went wrong!"} /> 
         </div>
 
-        <EscrowHistory />
+        <OpenEscrowTables />
       </div>}
     </div>
   )
