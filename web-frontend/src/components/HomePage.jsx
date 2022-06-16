@@ -7,9 +7,11 @@ import {tableFactoryContractAbi, tableFactoryContractAddress} from '../helpers/c
 import { generalContext } from '../App'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import ReadQrCodePasteCounterParty from './ReadQrCodePasteCounterParty';
+import QRCode from 'react-qr-code'
+
 
 const HomePage = () => {
-  const {Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, user, logout} = useMoralis();
+  const {account, Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, user, logout} = useMoralis();
   const {offerTableContractAddress, setofferTableContractAddress} = useContext(generalContext);
 
   const location = useLocation();
@@ -40,11 +42,16 @@ const HomePage = () => {
       {showCounterPartyScanner?
       <ReadQrCodePasteCounterParty />
       :
-      <>
+      <div style={{display:'flex', justifyContent:'center',  }}>
         <AccountTitle />
         <CounterPartyAddressInput offerTableContractAddress={offerTableContractAddress} setofferTableContractAddress={setofferTableContractAddress}/>
+
+        <div style={{fontSize:'2vh',position:'absolute', top:'44vh', zIndex:'9999', border:'2px solid #00ff00'}}>
+            <QRCode size={160} value={account? account: "something went wrong!"} /> 
+        </div>
+
         <EscrowHistory />
-      </>}
+      </div>}
     </div>
   )
 }

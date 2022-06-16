@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from 'react'
-import QRCode from 'react-qr-code'
+
 import { generalContext } from '../App'
 import Moralis, {useWeb3Contract, useWeb3ExecuteFunction, useMoralis, MoralisProvider} from "react-moralis"
 import {tableFactoryContractAbi, tableFactoryContractAddress} from '../helpers/contractInfo'
@@ -53,9 +53,7 @@ const EscrowHistory = () => {
   return (
     <div style={{userSelect:'none', position:'absolute', bottom:'32%', width:'100%', display:'flex', justifyContent:'center', color: '#fff', fontSize:'4vh', zIndex:'9999',}}>
         
-        <div style={{fontSize:'2vh',position:'fixed', top:'43vh',zIndex:'9999', border:'2px solid #00ff00'}}>
-            <QRCode value={account? account: "something went wrong!"} /> 
-        </div>
+
         
         
         <div  style={{ textAlign:'center',position:'absolute',bottom:'-31vh',display:'flex', justifyContent:'center'}}>
