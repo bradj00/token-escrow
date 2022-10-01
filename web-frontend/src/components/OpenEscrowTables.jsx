@@ -74,13 +74,14 @@ const OpenEscrowTables = () => {
                                 <th>#</th>
                                 <th>ID</th>
                                 <th>Counter Party</th>
+                                <th>Age</th>
 
                             </tr>
                             {getAllMyTables.data? getAllMyTables.data.map((item, index)=>{
                                 return(
                                     <tr className="hoverOpenTable" onClick={()=>{goToOpenTable(item.OT)}}  key={index}>
                                         <td>{index+1}</td>
-                                        <td>{getEllipsisTxt(item.OT.replace('0x',''), 5)}</td>
+                                        <td>{getEllipsisTxt(item.OT.replace('0x',''), 3)}</td>
                                         <td>{getEllipsisTxt(item.CP,5)}</td>
                                     </tr>
                                 )

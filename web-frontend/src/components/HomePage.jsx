@@ -8,6 +8,7 @@ import { generalContext } from '../App'
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import ReadQrCodePasteCounterParty from './ReadQrCodePasteCounterParty';
 import QRCode from 'react-qr-code'
+import { getEllipsisTxt } from '../helpers/formatters';
 
 
 const HomePage = () => {
@@ -46,8 +47,11 @@ const HomePage = () => {
         <AccountTitle />
         <CounterPartyAddressInput offerTableContractAddress={offerTableContractAddress} setofferTableContractAddress={setofferTableContractAddress}/>
 
-        <div style={{fontSize:'2vh',position:'absolute', top:'44vh',color:'#fff', zIndex:'9999', border:'2px solid #fff'}}>
-            <QRCode size={160} value={account? account: "something went wrong!"} /> 
+        <div style={{display:'flex', justifyContent:'center', fontSize:'2vh',position:'absolute', top:'48vh',color:'rgba(120,250,120,1)', zIndex:'9999', border:'2px solid #fff'}}>
+            <QRCode size={160} bgColor={'rgba(120,250,120,1)'} value={account? account: "something went wrong!"} /> 
+            <div style={{position:'absolute',bottom:'-5vh', fontSize:'3vh'}}>
+              {account? getEllipsisTxt(account, 4): "..."}
+            </div>
         </div>
 
         <OpenEscrowTables />

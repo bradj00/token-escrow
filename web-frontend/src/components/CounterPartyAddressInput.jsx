@@ -131,8 +131,11 @@ const CounterPartyAddressInput = (props) => {
             Open New Escrow
         </div>
         
-        <div onClick={()=>{setshowPage('getQrCode')}} className="buttonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-270%',}}>
+        <div onClick={()=>{setshowPage('getQrCode')}} className="buttonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-250%',}}>
             Join by QR Code
+        </div>
+        <div onClick={()=>{setshowPage('getQrCode')}} className="buttonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-360%',}}>
+            Join by Table ID
         </div>
     </div>
 )

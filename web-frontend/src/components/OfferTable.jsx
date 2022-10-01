@@ -84,7 +84,7 @@ const OfferTable = (props) => {
             <WarningIcon />
             </div>
             <div style={{userSelect:'none', fontSize:'3vh', color:'#fff', textAlign:'center', position:'absolute', width:'95%', height:'60%', backgroundColor:'rgba(0,0,0,0.2)',borderRadius:'5px',padding:'1vw'}}>
-            Review the trade <br></br><span style={{color:"#ff0000"}}>VERY CAREFULLY.</span><br></br> Refresh the page to ensure data is current before accepting! <br></br><br></br>Click the button below to confirm you are satisfied with how the trade appears.  
+            Review the trade <br></br><span style={{color:"#ff0000"}}>VERY CAREFULLY.</span><br></br> It wouldn't hurt to refresh the page to ensure data is current before accepting! <br></br><br></br>Click the button below to confirm you are satisfied with how the trade appears.  
             </div>
 
             <div className="finalizeButtonWithHover" style={{fontSize:'4vh', display:'flex', justifyContent:'center', alignItems:'center', position:'absolute',bottom:'3vh', width:'40%', height:'10%'}}>
