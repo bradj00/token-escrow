@@ -13,6 +13,7 @@ contract offerTableFactory {
     function createTable(address _counterParty) public 
     {
         offerTable table = new offerTable(
+            msg.sender,
             _counterParty
         );
 
