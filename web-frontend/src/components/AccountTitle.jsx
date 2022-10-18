@@ -21,13 +21,11 @@ const AccountTitle = () => {
   
     return (  
         <div style={{userSelect:'none', zIndex:'9999', position:'absolute',width:'100%',top:'0',display:'flex', justifyContent:'center',color:'#fff'}}>
-            <div style={{paddingTop:'3vh'}}>
+            <div style={{paddingTop:'2vh'}}>
                 <div style={{textAlign:'center', fontSize:'2vh',color:'#aaa'}}>
                     Hello
                 </div>
-                <div style={{fontSize:'3vh'}}>
-                    {account? getEllipsisTxt(account, 6): <></>}
-                </div>
+
             </div>
         </div>
     )

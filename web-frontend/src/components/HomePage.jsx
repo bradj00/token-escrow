@@ -47,11 +47,11 @@ const HomePage = () => {
         <AccountTitle />
         <CounterPartyAddressInput offerTableContractAddress={offerTableContractAddress} setofferTableContractAddress={setofferTableContractAddress}/>
 
-        <div style={{display:'flex', justifyContent:'center', fontSize:'2vh',position:'absolute', top:'48vh',color:'rgba(120,250,120,1)', zIndex:'9999', border:'2px solid #fff'}}>
-            <QRCode size={160} bgColor={'rgba(120,250,120,1)'} value={account? account: "something went wrong!"} /> 
-            <div style={{position:'absolute',bottom:'-5vh', fontSize:'3vh'}}>
+        <div style={{display:'flex', justifyContent:'center', fontSize:'2vh',position:'absolute', top:'10vh',color:'rgba(120,250,120,1)', zIndex:'9999', border:'2px solid #fff'}}>
+            <div style={{position:'absolute',top:'-5vh', fontSize:'3vh'}}>
               {account? getEllipsisTxt(account, 4): "..."}
             </div>
+            <QRCode size={160} bgColor={'rgba(120,250,120,1)'} value={account? account: "something went wrong!"} /> 
         </div>
 
         <OpenEscrowTables />

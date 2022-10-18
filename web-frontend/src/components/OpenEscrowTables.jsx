@@ -57,10 +57,29 @@ const OpenEscrowTables = () => {
       setUserActiveTable(tableID);
       setshowPage('offer');
   }
+
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
+
+
+
   return (
     <div style={{userSelect:'none', position:'absolute', bottom:'32%', width:'100%', display:'flex', justifyContent:'center', color: '#fff', fontSize:'4vh', zIndex:'9999',}}>
         
-
+        <div style={{fontSize:'1vh', position:'absolute', right:'10vw', top:'2vh',transform:'scale(1.7)'}}>
+        <label >
+            <input
+            type="checkbox"
+            checked={checked}
+            onChange={handleChange}
+            
+            />
+            Show finalized
+        </label>
+        </div>
         
         
         <div  style={{ textAlign:'center',position:'absolute',bottom:'-31vh',display:'flex', justifyContent:'center'}}>
@@ -71,16 +90,15 @@ const OpenEscrowTables = () => {
                     <table  style={{ width:'100%'}} >
                         <tbody>
                             <tr  style={{position:'sticky', top:'0',zIndex:'10000', width:'100%', textAlign:'center', backgroundColor:'rgba(50,50,150,1)',}}>
-                                <th>#</th>
                                 <th>ID</th>
                                 <th>Counter Party</th>
                                 <th>Age</th>
+                                <th>Status</th>
 
                             </tr>
                             {getAllMyTables.data? getAllMyTables.data.map((item, index)=>{
                                 return(
                                     <tr className="hoverOpenTable" onClick={()=>{goToOpenTable(item.OT)}}  key={index}>
-                                        <td>{index+1}</td>
                                         <td>{getEllipsisTxt(item.OT.replace('0x',''), 3)}</td>
                                         <td>{getEllipsisTxt(item.CP,5)}</td>
                                     </tr>
