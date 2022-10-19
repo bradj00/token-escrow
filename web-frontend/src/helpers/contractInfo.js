@@ -1,4 +1,4 @@
-export const tableFactoryContractAddress = '0x6B6Fe7bdAcA4251F786A8BBcfcfDa95E3c674e30';
+export const tableFactoryContractAddress = '0xC039b07916581F1423f9451aEA769a5dc9C5E72a';
 
 export const baseUrl = 'https://10.0.1.4:3000/table/'; 
 
@@ -34,9 +34,26 @@ export const tableFactoryContractAbi = [
 		"name": "getMyTables",
 		"outputs": [
 			{
-				"internalType": "contract offerTable[]",
+				"components": [
+					{
+						"internalType": "address",
+						"name": "P1",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "P2",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "tableId",
+						"type": "address"
+					}
+				],
+				"internalType": "struct offerTableFactory.P1andP2AndTableId[]",
 				"name": "",
-				"type": "address[]"
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -52,6 +69,11 @@ export const tableFactoryContractAbi = [
 		],
 		"name": "getTableInfo",
 		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
 			{
 				"internalType": "address",
 				"name": "",
@@ -296,6 +318,11 @@ export const tableContractAbi = [
 		"inputs": [],
 		"name": "getParties",
 		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
 			{
 				"internalType": "address",
 				"name": "",

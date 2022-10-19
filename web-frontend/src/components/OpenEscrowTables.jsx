@@ -106,8 +106,8 @@ const OpenEscrowTables = () => {
                                 console.log('---',item);
                                 return(
                                     <tr className="hoverOpenTable" onClick={()=>{goToOpenTable(item)}}  key={index}>
-                                        <td>{getEllipsisTxt(item.replace('0x',''), 3)}</td>
-                                        <td>{getEllipsisTxt(item,5)}</td>
+                                        <td>{getEllipsisTxt(item.tableId.replace('0x',''), 3)}</td>
+                                        {account.toUpperCase() == item.P2.toUpperCase()? <td>{getEllipsisTxt(item.P1,5)}</td>: <td>{getEllipsisTxt(item.P2,5)}</td> }
                                     </tr>
                                 )
                             }):<></>:<></>}

@@ -7,8 +7,8 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 
 contract offerTable {
-    address party1Address;
-    address party2Address;
+    address public party1Address;
+    address public party2Address;
     
     uint256 p1RequestEjectBlock = 0;
     uint256 p2RequestEjectBlock = 0;
@@ -30,8 +30,17 @@ contract offerTable {
         party2Address = _party2Address;
     }
 
-    function getParties() public view returns(address, address){
-        return (party1Address,party2Address);
+
+    // struct P1andP2AndTableId {
+    //     address P1;
+    //     address P2;
+    //     address tableId;
+    // }
+
+    function getParties() public view returns(address, address, address ){
+        // P1andP2AndTableId memory temp = P1andP2AndTableId(party1Address, party2Address, address(this) );
+        // return ( temp );
+        return( party1Address, party2Address, address(this) );
     }
 
     modifier isOfferTableOpen() {
@@ -141,7 +150,7 @@ contract offerTable {
         
         IERC20 erc20Contract;
         erc20Contract = IERC20(erc20AssetAddress);              
-        erc20Contract.transferFrom(msg.sender, address(this), erc20AssetAmount);  //transfer token into contract
+        erc20Contract.transferFrom(msg.sender, address(this), erc20AssetAmount);  //transfer tokens into contract
         
         erc20Asset memory temp;
         temp.contractAddress = erc20AssetAddress; 
