@@ -33,7 +33,7 @@ const OfferTable = (props) => {
         if (isWeb3Enabled){
             getBothParties.runContractFunction({
                 onError: (error) =>{
-                    console.log('big ERROR: ',error);
+                    console.log('111big ERROR: ',error);
                     }
             });
         }
@@ -47,7 +47,7 @@ const OfferTable = (props) => {
 
     useEffect(()=>{
         if (getBothParties.data && account){
-            // console.log('p1 and p2: ',getBothParties.data);
+            console.log('p1 and p2: ',getBothParties.data);
             if (getBothParties.data[1].toLowerCase() == account){
                 console.log('we are the counter-party!');
                 //set TRUE
@@ -112,22 +112,22 @@ const OfferTable = (props) => {
                     Table ID
                 </div>
                 <div style={{position:'absolute',bottom:'0%', left:'14vw', fontSize:'1.5vh', color:'#ffff00'}}>
-                    {UserActiveTable? getEllipsisTxt(UserActiveTable,5): 0x0000000}
+                    {UserActiveTable? getEllipsisTxt(UserActiveTable.tableId.replace('0x',''),5): 0x0000000}
                 </div>
 
                 <div onClick={()=>{goBackHome();}} className="backButtonHover" style={{zIndex:'9999', position:'absolute', top:'1vh',left:'5vw',transform:'scale(1.7)',}}>
                     <BackspaceIcon />
                 </div>
                 
-                <div style={{fontSize:'80%'}}>
-                    party1.eth
+                <div style={{fontSize:'80%', color: account.toUpperCase() == UserActiveTable.P1.toUpperCase()? '#00ff00':'#fff'}}>
+                    {UserActiveTable? getEllipsisTxt(UserActiveTable.P1,5): 0x0000000}
                 </div>
 
                 <div style={{paddingLeft:'5vw', paddingRight:'5vw', marginTop:'1vh', textAlign:'center', transform:'scale(1.8)', color:'#ffff00' }}>
                     <SwapHorizIcon />
                 </div>
-                <div style={{paddingRight:'2vw', fontSize:'80%'}}>
-                    party2.eth
+                <div style={{paddingRight:'2vw', fontSize:'80%', color: account.toUpperCase() == UserActiveTable.P2.toUpperCase()? '#00ff00':'#fff'}}>
+                    {UserActiveTable? getEllipsisTxt(UserActiveTable.P2,5): 0x0000000}
                 </div>
 
 

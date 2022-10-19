@@ -22,9 +22,8 @@ const HomePage = () => {
   const {CreateErrorText, setCreateErrorText} = useContext(generalContext);
   useEffect(()=>{
     if (activeTableDefined.includes('0x')){
-      console.log('active table is defined in URL: ',activeTableDefined);
-      setUserActiveTable(activeTableDefined);
-      
+      console.log('active table is defined in URL: ',activeTableDefined.replace('/', ''));
+      setUserActiveTable(activeTableDefined.replace('/', ''));
     }
   },[activeTableDefined])
 
