@@ -25,14 +25,20 @@ const OpenEscrowTables = () => {
       if (isWeb3Enabled){
           getAllMyTables.fetch({
               onError: (error) =>{
-                  alert('web3 error fetching user tables: ');
-                  alert(error);
+                  console.log('web3 error fetching user tables: ',error);
                 }
             })
         }
     },[isWeb3Enabled])
     
+  useEffect(()=>{
+    setInterval(()=>{
+        console.log('refreshing table list')
+        setrefreshUserEscrowTables(true);
+    },15000)
+  },[])
     
+
     
   useEffect(()=>{
     if (refreshUserEscrowTables == true){
@@ -96,14 +102,15 @@ const OpenEscrowTables = () => {
                                 <th>Status</th>
 
                             </tr>
-                            {getAllMyTables.data? getAllMyTables.data.map((item, index)=>{
+                            {getAllMyTables.data?getAllMyTables.data.length>=1? getAllMyTables.data.map((item, index)=>{
+                                console.log('---',item);
                                 return(
-                                    <tr className="hoverOpenTable" onClick={()=>{goToOpenTable(item.OT)}}  key={index}>
-                                        <td>{getEllipsisTxt(item.OT.replace('0x',''), 3)}</td>
-                                        <td>{getEllipsisTxt(item.CP,5)}</td>
+                                    <tr className="hoverOpenTable" onClick={()=>{goToOpenTable(item)}}  key={index}>
+                                        <td>{getEllipsisTxt(item.replace('0x',''), 3)}</td>
+                                        <td>{getEllipsisTxt(item,5)}</td>
                                     </tr>
                                 )
-                            }):<></>}
+                            }):<></>:<></>}
                             
                         </tbody>
                     </table>

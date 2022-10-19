@@ -51,6 +51,7 @@ const HomePage = () => {
             <div style={{position:'absolute',top:'-5vh', fontSize:'3vh'}}>
               {account? getEllipsisTxt(account, 4): "..."}
             </div>
+            
             <QRCode size={160} bgColor={'rgba(120,250,120,1)'} value={account? account: "something went wrong!"} /> 
         </div>
 

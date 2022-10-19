@@ -115,26 +115,26 @@ const CounterPartyAddressInput = (props) => {
         <div style={{display:'flex', justifyContent:'center', position:'absolute', width:'95%',marginTop:'-2vh',borderRadius:'10px', height:'250%', backgroundColor:'rgba(40,40,120,0.4)',zIndex:'9999', border:'1px solid #666'}}>
             <div className="scanButtonHover" onClick={()=>{setshowCounterPartyScanner(!showCounterPartyScanner)}} style={{fontSize:'1vh',textAlign:'center', position:'absolute',zIndex:'9999',right:'1vw',top:'1.5vh',}}>
                 <div>
-                    <QrCode2Icon style={{fontSize:'3vh'}}/><br></br>
+                    <QrCode2Icon style={{fontSize:'4vh'}}/><br></br>
                     SCAN
                 </div>
             </div>
         
 
-        <input autoComplete='off' onChange={checkInput} value={counterPartyAddress} maxLength="42" size="45" placeholder="Paste counter-party address" name="name"  style={{position:'absolute', textAlign:'center', top:'5%',zIndex:'9999', width:'90%', maxWidth:'50vw', height:'5vh', color:'#fff',backgroundColor:'rgba(0,0,0,0.2)',fontSize:'2.5vh', border:'0.5px solid #ccc', borderRadius:'15px', outline:'none'}}></input>
+        <input autoComplete='off' onChange={checkInput} value={counterPartyAddress} maxLength="42" size="45" placeholder="enter counter-party address" name="name"  style={{position:'absolute', textAlign:'center', top:'5%',zIndex:'9999', width:'90%', maxWidth:'50vw', height:'5vh', color:'#fff',backgroundColor:'rgba(0,0,0,0.2)',fontSize:'2.5vh', border:'0.5px solid #ccc', borderRadius:'15px', outline:'none'}}></input>
 
         </div>
 
 
         
         <div onClick={()=>{createNewTable()}} className="buttonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-110%',maxHeight:'2vh',display:'flex',alignItems:'center'}}>       
-            Open New Escrow
+            New Escrow
         </div>
         
-        <div onClick={()=>{setshowPage('getQrCode')}} className="joinButtonWithHover" style={{position:'absolute',maxHeight:'2vh', fontSize:'3vh',zIndex:'9999',bottom:'-250%',display:'flex',alignItems:'center'}}>
+        <div onClick={()=>{setshowPage('getQrCode')}} className="joinButtonWithHover" style={{position:'absolute',maxHeight:'2vh', fontSize:'3vh',zIndex:'9999',bottom:'-19vh',display:'flex',alignItems:'center'}}>
             Join by QR Code
         </div>
-        <div onClick={()=>{setshowPage('getQrCode')}} className="joinButtonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-360%',maxHeight:'2vh',display:'flex',alignItems:'center'}}>
+        <div onClick={()=>{setshowPage('getQrCode')}} className="joinButtonWithHover" style={{position:'absolute', fontSize:'3vh',zIndex:'9999',bottom:'-27vh',maxHeight:'2vh',display:'flex',alignItems:'center'}}>
             Join by Table ID
         </div>
     </div>
