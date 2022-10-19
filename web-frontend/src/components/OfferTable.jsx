@@ -28,6 +28,24 @@ const OfferTable = (props) => {
     useEffect(()=>{
         console.log('table ID is: ',something);
     },[something])
+    
+    useEffect(()=>{
+        if (account && UserActiveTable){
+            if ( account.toUpperCase() == UserActiveTable.P1.toUpperCase() ) {
+                console.log('we are the table creator!');
+                //set TRUE
+                settableCreator(true);
+            } else {
+                settableCreator(false);
+            }
+            if ( account.toUpperCase() == UserActiveTable.P2.toUpperCase() ) {
+                console.log('we are the counter-party!');
+                setcounterParty(true);
+            }else {
+                setcounterParty(false);
+            }
+        }
+    },[account, UserActiveTable])
 
     useEffect(()=>{
         if (isWeb3Enabled){
