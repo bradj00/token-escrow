@@ -34,7 +34,8 @@ const OfferTable = (props) => {
             if ( account.toUpperCase() == UserActiveTable.P1.toUpperCase() ) {
                 console.log('we are the table creator!');
                 //set TRUE
-                settableCreator(true);
+                // settableCreator(true);
+                setcounterParty(true);
             } else {
                 settableCreator(false);
             }
@@ -42,7 +43,7 @@ const OfferTable = (props) => {
                 console.log('we are the counter-party!');
                 setcounterParty(true);
             }else {
-                setcounterParty(false);
+                // setcounterParty(false);
             }
         }
     },[account, UserActiveTable])
