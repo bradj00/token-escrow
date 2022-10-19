@@ -76,6 +76,8 @@ const TheUserErc20Balances = (props) => {
                     console.log('error setting approval allowance: ',error);
                 }
             })
+        }else {
+            console.log('approval threshold is met. DEPOSITING tokens into contract and REGISTERING them with the table.')
         }
     }
   },[getApprovalBalance.data])
@@ -113,7 +115,7 @@ const TheUserErc20Balances = (props) => {
                             {displaySetQty[index]?<div className="okButtonHover" onClick={()=>{confirmTokenAndQty(index, item)}} style={{ zIndex:'60',padding:'3vh 3vw 3vh 3vw', borderRadius:'15px', position:'absolute',right:'0',}}>
                                 <ThumbUpIcon />
                             </div>:<></>}
-                            <div key={index} className="selectATokenEntry" onClick={()=>{setdisplaySetQty({[index]: true });}} style={{zIndex:'50',cursor:'pointer',display:'flex', alignItems:'center', fontSize:'3vh',position:'relative',width:'100%',height:'12vh',marginTop:'0.5vh',marginBottom:'0.5vh',left:'0.5vw', borderRadius:'15px'}}>
+                            <div key={index} className="selectATokenEntry" onClick={()=>{setdisplaySetQty({[index]: true }); setselectedTokenQty(0); setselectedToken(item) }} style={{zIndex:'50',cursor:'pointer',display:'flex', alignItems:'center', fontSize:'3vh',position:'relative',width:'100%',height:'12vh',marginTop:'0.5vh',marginBottom:'0.5vh',left:'0.5vw', borderRadius:'15px'}}>
                                 <div  style={{position:'absolute',left:'1vw',paddingTop:'0.5vh', top:'2%'}}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="5vw" height="5vh" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"  ><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
                                 </div>
