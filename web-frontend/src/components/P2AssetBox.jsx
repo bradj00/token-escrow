@@ -39,19 +39,18 @@ const P2AssetBox = (props) => {
         : 
           
         <div>
-          <div style={{paddingLeft:'0.5vw', display:'flex',  position:'absolute', top:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(255, 38, 0, 0.3)'}}>
-            <div>
-              <div style={{position:'absolute',left:'45%',fontSize:'2vh'}}>party2.eth</div> 
+          <div style={{paddingLeft:'0.5vw', display:'flex', justifyContent:'center',  position:'absolute', top:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(255, 38, 0, 0.3)'}}>
+            <div style={{fontSize:'3vh'}}>
               ERC-20 Assets
             </div> 
 
-            <div style={{width:props.counterParty?'80vw':'95%',height:'75%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
+            <div style={{width:props.counterParty?'80vw':'95%',height:'75%',top:'20%', left:'0.5vw', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
             
             <table style={{width:'100%'}} >
             <tbody>
             <tr style={{backgroundColor:'rgba(250,100,100,0.5)',}}>
-              <th>Asset</th>
-              <th>Token ID</th>
+              <th>Token</th>
+              <th>Amount</th>
               <th>Contract</th>
             </tr>
             <tr>
@@ -76,8 +75,7 @@ const P2AssetBox = (props) => {
 
           </div>
           <div style={{paddingLeft:'0.5vw', display:'flex', position:'absolute', bottom:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(255, 77, 38, 0.44)'}}>
-            <div>
-              <div style={{position:'absolute',left:'46%',fontSize:'2vh'}}>party2.eth</div> 
+            <div style={{fontSize:'3vh'}}>
               ERC-721 Assets
             </div>  
             <div style={{width:props.counterParty?'80vw':'95%',height:'75%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
@@ -86,22 +84,26 @@ const P2AssetBox = (props) => {
             <tbody>
             <tr style={{backgroundColor:'rgba(250,100,100,0.5)',}}>
               <th>Asset</th>
+              <th>Image</th>
               <th>Token ID</th>
-              <th>Contract</th>
+              <th>View On OpenSea</th>
             </tr>
             <tr>
-              <td>RUBY</td>
-              <td>14,600</td>
+              <td>Bored Ape</td>
+              <td></td>
+              <td>157</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             <tr>
-              <td>EMERALD</td>
-              <td>9,500,000</td>
+              <td>MCPC</td>
+              <td></td>
+              <td>7206</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             <tr>
-              <td>ETH</td>
-              <td>14.6</td>
+              <td>Third NFT</td>
+              <td></td>
+              <td>72</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             </tbody>

@@ -1,11 +1,11 @@
 import React, {useState, useContext} from 'react'
-import {useMoralis, useWeb3ExecuteFunction} from 'react-moralis'; 
+import {useMoralis, useWeb3ExecuteFunction, useERC20Balances} from 'react-moralis'; 
 import { commaNumber } from '../../helpers/formatters';
 import CancelIcon from '@mui/icons-material/Cancel';
 import SetErc20AddQty from './SetErc20AddQty';
 import { useEffect } from 'react';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { Erc20Abi } from '../../helpers/contractInfo';
+import { Erc20Abi, tableContractAbi } from '../../helpers/contractInfo';
 import { generalContext } from '../../App';
 
 const TheUserErc20Balances = (props) => {
@@ -14,6 +14,8 @@ const TheUserErc20Balances = (props) => {
   const [selectedToken, setselectedToken] = useState();
   const [selectedTokenQty, setselectedTokenQty] = useState(0);
   const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
+  const {userErc20TokenBalance, setuserErc20TokenBalance} = useContext(generalContext);
+
 
   const getApprovalBalance = useWeb3ExecuteFunction  ({
     abi: Erc20Abi,
@@ -31,6 +33,15 @@ const TheUserErc20Balances = (props) => {
     params: {
         spender: UserActiveTable? UserActiveTable.tableId: "0x0000000000000000000000000000000000000000",
         amount: Moralis.Units.ETH(selectedTokenQty)
+    }
+  });
+  const party1DepositErc20 = useWeb3ExecuteFunction  ({
+    abi: tableContractAbi,
+    contractAddress: UserActiveTable? UserActiveTable.tableId: "0x0000000000000000000000000000000000000000",
+    functionName: "party1AddErc20AssetAddress",
+    params: {
+        erc20AssetAddress: selectedToken? selectedToken.token_address: "0x0000000000000000000000000000000000000000",
+        erc20AssetAmount: Moralis.Units.ETH(selectedTokenQty)
     }
   });
 
@@ -74,10 +85,39 @@ const TheUserErc20Balances = (props) => {
             approveAllowanceAmount.fetch({
                 onError: (error) =>{
                     console.log('error setting approval allowance: ',error);
-                }
+                },
+                onSuccess : async (tx)=>tx.wait().then(newTx => {
+                    console.log('Approved contract to spend user token: ',selectedToken, tx)
+                    console.log('DEPOSITING tokens into contract and REGISTERING them with the table.');
+                    party1DepositErc20.fetch({
+                        onError: (error) =>{
+                            console.log('error depositing P1 erc20 asset: ',error);
+                        },
+                        onSuccess : async (tx)=>tx.wait().then(newTx => {
+                            setTimeout(()=>{
+                                console.log('refreshing balances');
+                                getUserErc20Balances.fetchERC20Balances();
+                            },5000)
+                        })
+                    })
+                })
             })
         }else {
             console.log('approval threshold is met. DEPOSITING tokens into contract and REGISTERING them with the table.')
+
+            party1DepositErc20.fetch({
+                onError: (error) =>{
+                    console.log('error depositing P1 erc20 asset: ',error);
+                },
+                onSuccess : async (tx)=>tx.wait().then(newTx => {
+                    setTimeout(()=>{
+                        console.log('refreshing balances');
+                        getUserErc20Balances.fetchERC20Balances();
+                    },5000)
+                })
+            })
+
+
         }
     }
   },[getApprovalBalance.data])
@@ -86,6 +126,18 @@ const TheUserErc20Balances = (props) => {
   useEffect(()=>{
     // console.log('displaySetQty: ',displaySetQty);
   },[displaySetQty])
+
+
+  const getUserErc20Balances = useERC20Balances();
+
+  useEffect(()=>{
+    if (getUserErc20Balances.data){
+      console.log('[ '+account+' ] user ERC20 balances: ',getUserErc20Balances.data);
+      setuserErc20TokenBalance(getUserErc20Balances.data);
+    }
+  },[getUserErc20Balances.data])
+
+
 
   return (
     <>
@@ -102,7 +154,7 @@ const TheUserErc20Balances = (props) => {
         <div style={{position:'absolute',top:'13vh',border:'0.5px solid #777',width:'100%'}}>
         </div>
 
-        <div style={{position:'absolute',top:'16vh',width:'99%'}}>
+        <div style={{position:'absolute',top:'16vh',width:'99%',overflow:'scroll',height:'78vh'}}>
             <div style={{position:'relative',paddingBottom:'5vh', top:'0vh',textAlign:'left', fontSize:'2vh',left:'0vw',fontWeight:'bolder',}}>
                 Suggested from your wallet
             </div>
@@ -123,7 +175,7 @@ const TheUserErc20Balances = (props) => {
                                     {item.symbol}
                                 </div>
                                 <div  style={{fontSize:'2.5vh', position:'absolute',top:'60%', left:'1vw', color:'rgba(200,200,255,0.9)' }}>
-                                    Balance: {commaNumber(parseInt(Moralis.Units.FromWei(item.balance)) )} 
+                                    Balance: {commaNumber(parseFloat(Moralis.Units.FromWei(item.balance) ).toFixed(8) )} 
                                 </div>
                                 
                                 {displaySetQty[index]?

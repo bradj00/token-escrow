@@ -37,15 +37,15 @@ const P1AssetBox = (props) => {
 
     <div style={{display:'flex', justifyContent:'center', alignItems:'center',marginTop:'50vh'}}>
         <div style={{paddingLeft:'0.5vw', display:'flex',  justifyContent:'center',position:'absolute', top:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(40, 78, 255, 0.3)'}}>
-          <div>
-            <div style={{position:'absolute',left:'5%',fontSize:'2vh'}}>party1.eth</div> ERC-20 Assets
+        <div style={{fontSize:'3vh'}}>
+             ERC-20 Assets
           </div>  
           <div style={{width:props.tableCreator?'80vw':'93.6vw',height:'75%',left:'1%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
      
           <table style={{width:'100%'}} >
             <tbody>
             <tr style={{backgroundColor:'rgba(100,100,250,0.5)',}}>
-              <th>Asset</th>
+              <th>Token</th>
               <th>Amount</th>
               <th>Contract</th>
             </tr>
@@ -70,8 +70,8 @@ const P1AssetBox = (props) => {
           </div>
         </div>
         <div style={{ display:'flex', justifyContent:'center',position:'absolute', bottom:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(40, 38, 255, 0.44)'}}>
-          <div>
-          <div style={{position:'absolute',left:'5%',fontSize:'2vh'}}>party1.eth</div> ERC-721 Assets
+          <div style={{fontSize:'3vh'}}>
+          ERC-721 Assets
           </div>  
           <div style={{width:props.tableCreator?'80vw':'93.6vw',height:'75%',left:'1%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
 
@@ -79,22 +79,26 @@ const P1AssetBox = (props) => {
             <tbody>
             <tr style={{backgroundColor:'rgba(100,100,250,0.5)',}}>
               <th>Asset</th>
+              <th>Image</th>
               <th>Token ID</th>
-              <th>Contract</th>
+              <th>View On OpenSea</th>
             </tr>
             <tr>
-              <td>RUBY</td>
-              <td>14,600</td>
+              <td>Bored Ape</td>
+              <td></td>
+              <td>157</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             <tr>
-              <td>EMERALD</td>
-              <td>9,500,000</td>
+              <td>MCPC</td>
+              <td></td>
+              <td>7206</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             <tr>
-              <td>ETH</td>
-              <td>14.6</td>
+              <td>Third NFT</td>
+              <td></td>
+              <td>72</td>
               <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
             </tr>
             </tbody>

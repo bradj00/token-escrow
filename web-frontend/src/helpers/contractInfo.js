@@ -826,3 +826,26 @@ export const Erc20Abi = [
 		"type": "function"
 	}
 ];
+
+export const TokenLookupFromAddyContract = "0x4E81D8B4298C5cDB5CcDb2b2893deBFdc1B19611"; //helper contract to lookup array of token contract addresses to names
+export const TokenLookupFromAddyAbi = [
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "tokenList",
+				"type": "address[]"
+			}
+		],
+		"name": "lookupArrayOfErc20",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
