@@ -13,7 +13,7 @@ const P1AssetBox = (props) => {
   const {clickedFinalize, setclickedFinalize}             = useContext(generalContext);
   const {userErc20TokenBalance, setuserErc20TokenBalance} = useContext(generalContext);
   
-  const [displayUserErc20Assets, setdisplayUserErc20Assets] = useState(false);
+  const {displayUserErc20Assets, setdisplayUserErc20Assets} = useContext(generalContext);
   
   //{ fetchERC20Balances, data, isLoading, isFetching, error }
   const getUserErc20Balances = useERC20Balances();
@@ -26,7 +26,7 @@ const P1AssetBox = (props) => {
   },[isWeb3Enabled])
   useEffect(()=>{
     if (getUserErc20Balances.data){
-      console.log('[ '+account+' ] user ERC20 balances: ',getUserErc20Balances.data);
+      // console.log('[ '+account+' ] user ERC20 balances: ',getUserErc20Balances.data);
       setuserErc20TokenBalance(getUserErc20Balances.data);
     }
   },[getUserErc20Balances.data])

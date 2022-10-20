@@ -547,7 +547,7 @@ export const tableContractAbi = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-]
+];
 
 export const Erc20Abi = [
 	{

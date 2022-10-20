@@ -7,11 +7,11 @@ import P1AssetBox from './P1AssetBox';
 import P2AssetBox from './P2AssetBox';
 import { useNavigate, useLocation, Link } from 'react-router-dom'
 import {getEllipsisTxt} from "../helpers/formatters";
-import { tableContractAbi } from '../helpers/contractInfo';
-import { useWeb3Contract,useMoralis, } from 'react-moralis';
+import { useWeb3Contract,useMoralis,useWeb3ExecuteFunction, } from 'react-moralis';
 import TheUserErc20Balances from './sub-components/TheUserErc20Balances';
 import WarningIcon from '@mui/icons-material/Warning';
 import '../styles.css'
+import { Erc20Abi, tableContractAbi, TokenLookupFromAddyContract, TokenLookupFromAddyAbi } from '../helpers/contractInfo';
 
 const OfferTable = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);
@@ -25,6 +25,25 @@ const OfferTable = (props) => {
     const [counterParty, setcounterParty] = useState(false);
     const [tableCreator, settableCreator] = useState(false);
 
+
+    const LookupErcTokenSymbolsP1 = useWeb3ExecuteFunction  ({
+        abi: TokenLookupFromAddyAbi,
+        contractAddress: TokenLookupFromAddyContract,
+        functionName: "lookupArrayOfErc20",
+        params: {
+            tokenList: [] 
+        }
+      });
+    const LookupErcTokenSymbolsP2 = useWeb3ExecuteFunction  ({
+        abi: TokenLookupFromAddyAbi,
+        contractAddress: TokenLookupFromAddyContract,
+        functionName: "lookupArrayOfErc20",
+        params: {
+            tokenList: [] //p2 registered tokens 
+        }
+      });
+      
+
     useEffect(()=>{
         console.log('table ID is: ',something);
     },[something])
@@ -33,9 +52,7 @@ const OfferTable = (props) => {
         if (account && UserActiveTable){
             if ( account.toUpperCase() == UserActiveTable.P1.toUpperCase() ) {
                 console.log('we are the table creator!');
-                //set TRUE
-                // settableCreator(true);
-                setcounterParty(true);
+                settableCreator(true);
             } else {
                 settableCreator(false);
             }
@@ -43,20 +60,20 @@ const OfferTable = (props) => {
                 console.log('we are the counter-party!');
                 setcounterParty(true);
             }else {
-                // setcounterParty(false);
+                setcounterParty(false);
             }
         }
     },[account, UserActiveTable])
 
     useEffect(()=>{
-        if (isWeb3Enabled){
+        if (isWeb3Enabled && UserActiveTable){
             getBothParties.runContractFunction({
                 onError: (error) =>{
-                    console.log('111big ERROR: ',error);
+                    // console.log('111big ERROR: ',error);
                     }
             });
         }
-    },[isWeb3Enabled]);
+    },[isWeb3Enabled, UserActiveTable]);
     
     const getBothParties = useWeb3Contract({
         abi: tableContractAbi,

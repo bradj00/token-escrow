@@ -5,7 +5,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import SetErc20AddQty from './SetErc20AddQty';
 import { useEffect } from 'react';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import { Erc20Abi, tableContractAbi } from '../../helpers/contractInfo';
+import { Erc20Abi, tableContractAbi, TokenLookupFromAddyContract, TokenLookupFromAddyAbi } from '../../helpers/contractInfo';
 import { generalContext } from '../../App';
 
 const TheUserErc20Balances = (props) => {
@@ -17,6 +17,8 @@ const TheUserErc20Balances = (props) => {
   const {userErc20TokenBalance, setuserErc20TokenBalance} = useContext(generalContext);
 
 
+
+  
   const getApprovalBalance = useWeb3ExecuteFunction  ({
     abi: Erc20Abi,
     contractAddress: selectedToken? selectedToken.token_address: "0x0000000000000000000000000000000000000000",
@@ -132,7 +134,7 @@ const TheUserErc20Balances = (props) => {
 
   useEffect(()=>{
     if (getUserErc20Balances.data){
-      console.log('[ '+account+' ] user ERC20 balances: ',getUserErc20Balances.data);
+    //   console.log('[ '+account+' ] user ERC20 balances: ',getUserErc20Balances.data);
       setuserErc20TokenBalance(getUserErc20Balances.data);
     }
   },[getUserErc20Balances.data])
