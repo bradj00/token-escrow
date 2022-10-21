@@ -23,13 +23,12 @@ contract offerTable {
 
     bool finalizedP1 = false;
     bool finalizedP2 = false;
-    bool disableOfferTable = false;
+    bool public disableOfferTable = false;
 
     constructor (address _party1Address, address _party2Address) {
         party1Address = _party1Address;
         party2Address = _party2Address;
     }
-
 
     // struct P1andP2AndTableId {
     //     address P1;
@@ -90,8 +89,6 @@ contract offerTable {
     function p1EjectAllFulfill() public  onlyParty1 {
         require(block.number >= p1RequestEjectBlock+5, "you must wait 5 blocks before eject is possible");
 
-        //transfer all erc721 tokens out
-        //transfer all erc20 tokens out
         // for (uint i = 0; i < party1ArrayOfErc721.length; i++){
         //     IERC721 nftContract;
         //     nftContract = IERC721(party1ArrayOfErc721[i].contractAddress);
@@ -99,17 +96,19 @@ contract offerTable {
         //     disableOfferTable=true;
         // }
         for (uint i = 0; i < party1ArrayOfErc20.length; i++){
-            ERC20 erc20Contract = ERC20( party1ArrayOfErc20[i].contractAddress );
+            ERC20 erc20Contract = ERC20( address(party1ArrayOfErc20[i].contractAddress) );
            
 
             //transfer amount exceeds allowance?????? 
-            erc20Contract.transferFrom( address(this), party1Address, party1ArrayOfErc20[i].amount);  //transfer tokens from contract to party1Address
+
+            //address(this) is probably the erc20 contract...NOT our contract
+            erc20Contract.transfer (party1Address, party1ArrayOfErc20[i].amount);  //transfer tokens from contract to party1Address
             disableOfferTable=true;
         }
 
 
         // party1ArrayOfErc721 = [];
-        // party1ArrayOfErc20  = [];
+       delete party1ArrayOfErc20;
     }
 
 

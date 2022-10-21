@@ -1,4 +1,4 @@
-export const tableFactoryContractAddress = '0x2F049D8AFEcc93e817189ef2C357e91238fd971A';
+export const tableFactoryContractAddress = '0x99C4489D545972f5aC80251022b5a15bCbcCb2A4';
 
 export const baseUrl = 'https://10.0.1.4:3000/table/'; 
 
@@ -116,91 +116,6 @@ export const tableFactoryContractAbi = [
 
 export const tableContractAbi = [
 	{
-		"inputs": [],
-		"name": "executeSwap",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "finalizeOfferParty1",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "finalizeOfferParty2",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "p1EjectAllFulfill",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "p1EjectAllRequest",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "p2EjectAllFulfill",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "p2EjectAllRequest",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "erc20AssetAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "erc20AssetAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "party1AddErc20AssetAddress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "erc721AssetAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "party1AddErc721AssetAddress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -298,42 +213,6 @@ export const tableContractAbi = [
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "erc20AssetAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "erc20AssetAmount",
-				"type": "uint256"
-			}
-		],
-		"name": "party2AddErc20AssetAddress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "erc721AssetAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "party2AddErc721AssetAddress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -416,6 +295,40 @@ export const tableContractAbi = [
 	},
 	{
 		"inputs": [],
+		"name": "disableOfferTable",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "executeSwap",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "finalizeOfferParty1",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "finalizeOfferParty2",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "getParties",
 		"outputs": [
 			{
@@ -432,6 +345,31 @@ export const tableContractAbi = [
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getparty1ArrayOfErc20",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "contractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct offerTable.erc20Asset[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -458,6 +396,31 @@ export const tableContractAbi = [
 				"name": "",
 				"type": "tuple[]"
 			},
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "contractAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct offerTable.erc20Asset[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getparty2ArrayOfErc20",
+		"outputs": [
 			{
 				"components": [
 					{
@@ -523,6 +486,70 @@ export const tableContractAbi = [
 	},
 	{
 		"inputs": [],
+		"name": "p1EjectAllFulfill",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "p1EjectAllRequest",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "p2EjectAllFulfill",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "p2EjectAllRequest",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "erc20AssetAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "erc20AssetAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "party1AddErc20AssetAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "erc721AssetAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "party1AddErc721AssetAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "party1Address",
 		"outputs": [
 			{
@@ -532,6 +559,42 @@ export const tableContractAbi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "erc20AssetAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "erc20AssetAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "party2AddErc20AssetAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "erc721AssetAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "party2AddErc721AssetAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
