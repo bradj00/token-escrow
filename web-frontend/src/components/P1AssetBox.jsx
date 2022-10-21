@@ -47,10 +47,10 @@ const P1AssetBox = (props) => {
   });
 
   useEffect(()=>{
-    console.log('tokenAddys: ',tokenAddys)
+    // console.log('tokenAddys: ',tokenAddys)
     if (getP1Offer.data){
       if (tokenAddys.length == getP1Offer.data[1].length){
-        console.log('GOT FINAL LIST: ', tokenAddys)
+        // console.log('GOT FINAL LIST: ', tokenAddys)
         lookupTokenSymbolByAddress.fetch({
           onError: (error) =>{
               console.log('error with token lookups. Did one of the addresses not have a symbol? : ',error);
@@ -63,7 +63,7 @@ const P1AssetBox = (props) => {
   useEffect(()=>{
     if (getP1Offer.data){
       // console.log('data getP1Offer: ',getP1Offer.data[0]); //ERC721 tokens
-      console.log('P1 offers (ERC20): ',getP1Offer.data[1]); //ERC20 tokens
+      // console.log('P1 offers (ERC20): ',getP1Offer.data[1]); //ERC20 tokens
       settokenAddys([]);
       for (let i = 0; i <getP1Offer.data[1].length; i++){
         // console.log('item: ',getP1Offer.data[1][i].contractAddress, parseInt(getP1Offer.data[1][i].amount._hex, 16))
@@ -75,9 +75,9 @@ const P1AssetBox = (props) => {
   
   useEffect(()=>{
     if (lookupTokenSymbolByAddress.data){
-      console.log('lookupTokenSymbolByAddress: ',lookupTokenSymbolByAddress.data); 
+      // console.log('lookupTokenSymbolByAddress: ',lookupTokenSymbolByAddress.data); 
       for (let i = 0 ; i < lookupTokenSymbolByAddress.data.length; i++){
-        console.log(lookupTokenSymbolByAddress.data[i], parseInt(getP1Offer.data[1][i].amount._hex,16) )
+        // console.log(lookupTokenSymbolByAddress.data[i], parseInt(getP1Offer.data[1][i].amount._hex,16) )
       }
     }
   },[lookupTokenSymbolByAddress.data])
@@ -122,7 +122,7 @@ const P1AssetBox = (props) => {
             {lookupTokenSymbolByAddress.data?
             lookupTokenSymbolByAddress.data.map((item, index)=>{
               return(
-                <tr>
+                <tr key={index}>
                   <td>{item}</td>
                   <td>{ (parseInt(getP1Offer.data[1][index].amount._hex,16) / (10 ** 18) ) }</td>
                   <td><a href="https://yahoo.com" target='blank'>https://..</a></td>

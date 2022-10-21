@@ -5,10 +5,12 @@ import { baseUrl } from '../helpers/contractInfo';
 import WarningIcon from '@mui/icons-material/Warning';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import TheUserErc20Balances from './sub-components/TheUserErc20Balances';
-import { useERC20Balances, useMoralis } from "react-moralis";
+import { useERC20Balances, useMoralis, useWeb3ExecuteFunction, useWeb3Contract } from "react-moralis";
 import useWindowDimensions from './useWindowDimensions';
+import { Erc20Abi, tableContractAbi, TokenLookupFromAddyContract, TokenLookupFromAddyAbi } from '../helpers/contractInfo';
 
 const P2AssetBox = (props) => {
+  const {Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, account, user, logout} = useMoralis();
   const [anyP2Values, setanyP2Values] = useState();
   const {clickedFinalize, setclickedFinalize}               = useContext(generalContext);
   const {UserActiveTable, setUserActiveTable}               = useContext(generalContext);
@@ -16,11 +18,80 @@ const P2AssetBox = (props) => {
   const {userErc20TokenBalance, setuserErc20TokenBalance}   = useContext(generalContext);
 
   const { height, width } = useWindowDimensions(); //custom hook for window dimensions
-
+  const [tokenAddys, settokenAddys] = useState([]);
 
   useEffect(()=>{
     console.log('new width:', width)
   },[width]);
+
+
+  const lookupTokenSymbolByAddress = useWeb3ExecuteFunction  ({
+    abi: TokenLookupFromAddyAbi,
+    contractAddress: TokenLookupFromAddyContract,
+    functionName: "lookupArrayOfErc20",
+    params: {
+      tokenList: tokenAddys
+    }
+  });
+
+  const getP2Offer = useWeb3ExecuteFunction  ({
+    abi: tableContractAbi,
+    contractAddress: UserActiveTable? UserActiveTable.tableId : "0x0000000000000000000000000000000000000000",
+    functionName: "getparty2Offer",
+  });
+
+  useEffect(()=>{
+    console.log('tokenAddys: ',tokenAddys)
+    if (getP2Offer.data){
+      if (tokenAddys.length == getP2Offer.data[1].length){
+        // console.log('GOT FINAL LIST: ', tokenAddys)
+        lookupTokenSymbolByAddress.fetch({
+          onError: (error) =>{
+              console.log('error with token lookups. Did one of the addresses not have a symbol? : ',error);
+            } 
+        })
+      }
+    }
+  },[tokenAddys]);
+
+  useEffect(()=>{
+    if (getP2Offer.data){
+      // console.log('data getP2Offer: ',getP2Offer.data[0]); //ERC721 tokens
+      console.log('P2 offers (ERC20): ',getP2Offer.data[1]); //ERC20 tokens
+      settokenAddys([]);
+      for (let i = 0; i <getP2Offer.data[1].length; i++){
+        // console.log('item: ',getP2Offer.data[1][i].contractAddress, parseInt(getP2Offer.data[1][i].amount._hex, 16))
+        settokenAddys(prevArray => [...prevArray, getP2Offer.data[1][i].contractAddress])
+      } 
+
+    }
+  },[getP2Offer.data])
+  
+  useEffect(()=>{
+    if (lookupTokenSymbolByAddress.data){
+      console.log('lookupTokenSymbolByAddress: ',lookupTokenSymbolByAddress.data); 
+      for (let i = 0 ; i < lookupTokenSymbolByAddress.data.length; i++){
+        console.log(lookupTokenSymbolByAddress.data[i], parseInt(getP2Offer.data[1][i].amount._hex,16) )
+      }
+    }
+  },[lookupTokenSymbolByAddress.data])
+
+
+  useEffect(()=>{
+    if (isWeb3Enabled){
+        getP2Offer.fetch({
+            onError: (error) =>{
+                console.log('error with getP1Offer: ',error);
+              }
+          })
+      }
+  },[isWeb3Enabled])
+
+
+
+
+
+
   return (
     <>
 
@@ -43,21 +114,23 @@ const P2AssetBox = (props) => {
               <th>Amount</th>
               <th>Contract</th>
             </tr>
-            <tr>
-              <td>RUBY</td>
-              <td>14,600</td>
-              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
-            </tr>
-            <tr>
-              <td>EMERALD</td>
-              <td>9,500,000</td>
-              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
-            </tr>
-            <tr>
-              <td>ETH</td>
-              <td>14.6</td>
-              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
-            </tr>
+            
+            {lookupTokenSymbolByAddress.data?
+            lookupTokenSymbolByAddress.data.map((item, index)=>{
+              return(
+                <tr key={index}>
+                  <td>{item}</td>
+                  <td>{ (parseInt(getP2Offer.data[1][index].amount._hex,16) / (10 ** 18) ) }</td>
+                  <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
+                </tr>
+              )
+            })
+
+            :
+            <></>
+            
+          
+            }
             </tbody>
         </table>
 

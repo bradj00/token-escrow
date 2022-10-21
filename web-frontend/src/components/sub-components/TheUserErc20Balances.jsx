@@ -46,6 +46,15 @@ const TheUserErc20Balances = (props) => {
         erc20AssetAmount: Moralis.Units.ETH(selectedTokenQty)
     }
   });
+  const party2DepositErc20 = useWeb3ExecuteFunction  ({
+    abi: tableContractAbi,
+    contractAddress: UserActiveTable? UserActiveTable.tableId: "0x0000000000000000000000000000000000000000",
+    functionName: "party2AddErc20AssetAddress",
+    params: {
+        erc20AssetAddress: selectedToken? selectedToken.token_address: "0x0000000000000000000000000000000000000000",
+        erc20AssetAmount: Moralis.Units.ETH(selectedTokenQty)
+    }
+  });
 
   useEffect(()=>{
     if (selectedToken){
@@ -91,6 +100,9 @@ const TheUserErc20Balances = (props) => {
                 onSuccess : async (tx)=>tx.wait().then(newTx => {
                     console.log('Approved contract to spend user token: ',selectedToken, tx)
                     console.log('DEPOSITING tokens into contract and REGISTERING them with the table.');
+
+                    if (props.counterParty == false){
+
                     party1DepositErc20.fetch({
                         onError: (error) =>{
                             console.log('error depositing P1 erc20 asset: ',error);
@@ -102,22 +114,50 @@ const TheUserErc20Balances = (props) => {
                             },5000)
                         })
                     })
+                    }else {
+                        party2DepositErc20.fetch({
+                            onError: (error) =>{
+                                console.log('error depositing P2 erc20 asset: ',error);
+                            },
+                            onSuccess : async (tx)=>tx.wait().then(newTx => {
+                                setTimeout(()=>{
+                                    console.log('refreshing balances');
+                                    getUserErc20Balances.fetchERC20Balances();
+                                },5000)
+                            })
+                        })
+                    }
                 })
             })
         }else {
             console.log('approval threshold is met. DEPOSITING tokens into contract and REGISTERING them with the table.')
 
-            party1DepositErc20.fetch({
-                onError: (error) =>{
-                    console.log('error depositing P1 erc20 asset: ',error);
-                },
-                onSuccess : async (tx)=>tx.wait().then(newTx => {
-                    setTimeout(()=>{
-                        console.log('refreshing balances');
-                        getUserErc20Balances.fetchERC20Balances();
-                    },5000)
+            if (props.counterParty == false){
+
+                party1DepositErc20.fetch({
+                    onError: (error) =>{
+                        console.log('error depositing P1 erc20 asset: ',error);
+                    },
+                    onSuccess : async (tx)=>tx.wait().then(newTx => {
+                        setTimeout(()=>{
+                            console.log('refreshing balances');
+                            getUserErc20Balances.fetchERC20Balances();
+                        },5000)
+                    })
                 })
-            })
+                }else {
+                    party2DepositErc20.fetch({
+                        onError: (error) =>{
+                            console.log('error depositing P2 erc20 asset: ',error);
+                        },
+                        onSuccess : async (tx)=>tx.wait().then(newTx => {
+                            setTimeout(()=>{
+                                console.log('refreshing balances');
+                                getUserErc20Balances.fetchERC20Balances();
+                            },5000)
+                        })
+                    })
+                }
 
 
         }

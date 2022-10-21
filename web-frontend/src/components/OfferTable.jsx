@@ -133,7 +133,7 @@ const OfferTable = (props) => {
            
             {displayUserErc20Assets ? 
             <div className="confirmationBox" style={{zIndex:'9999',color:'#fff',fontSize:'3vh', position:'fixed', top:'5vh', display:'flex', textAlign:'center', justifyContent:'center', alignItems:'center', width:'100%',height:'100vh', zIndex:'9999',backgroundColor:'rgba(40, 38, 120, 1)',border:'1px solid #0088ff',borderRadius:'5px'}}>
-                <TheUserErc20Balances userErc20TokenBalance={userErc20TokenBalance} displayUserErc20Assets={displayUserErc20Assets} setdisplayUserErc20Assets={setdisplayUserErc20Assets}/>
+                <TheUserErc20Balances  counterParty={counterParty} tableCreator={tableCreator} userErc20TokenBalance={userErc20TokenBalance} displayUserErc20Assets={displayUserErc20Assets} setdisplayUserErc20Assets={setdisplayUserErc20Assets}/>
             </div>
             :<></>}
             
