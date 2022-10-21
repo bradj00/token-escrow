@@ -2,34 +2,102 @@ import React, {useState, useContext} from 'react'
 import { generalContext } from '../App';
 import WarningIcon from '@mui/icons-material/Warning';
 import AddBoxIcon from '@mui/icons-material/AddBox';
-import { useERC20Balances, useMoralis } from "react-moralis";
-
+import { useERC20Balances, useMoralis, useWeb3ExecuteFunction, useWeb3Contract } from "react-moralis";
 import { useEffect } from 'react';
 import TheUserErc20Balances from './sub-components/TheUserErc20Balances';
-
+import { Erc20Abi, tableContractAbi, TokenLookupFromAddyContract, TokenLookupFromAddyAbi } from '../helpers/contractInfo';
 const P1AssetBox = (props) => {
   const {Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, account, user, logout} = useMoralis();
  
   const {clickedFinalize, setclickedFinalize}             = useContext(generalContext);
   const {userErc20TokenBalance, setuserErc20TokenBalance} = useContext(generalContext);
-  
+  const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
   const {displayUserErc20Assets, setdisplayUserErc20Assets} = useContext(generalContext);
-  
+  const [tokenAddys, settokenAddys] = useState([]);
   //{ fetchERC20Balances, data, isLoading, isFetching, error }
   const getUserErc20Balances = useERC20Balances();
-
+  
   
   useEffect(()=>{
     if (isWeb3Enabled){
-      getUserErc20Balances.fetchERC20Balances();
+      
     }
   },[isWeb3Enabled])
+
   useEffect(()=>{
     if (getUserErc20Balances.data){
       // console.log('[ '+account+' ] user ERC20 balances: ',getUserErc20Balances.data);
       setuserErc20TokenBalance(getUserErc20Balances.data);
     }
   },[getUserErc20Balances.data])
+  
+  const lookupTokenSymbolByAddress = useWeb3ExecuteFunction  ({
+    abi: TokenLookupFromAddyAbi,
+    contractAddress: TokenLookupFromAddyContract,
+    functionName: "lookupArrayOfErc20",
+    params: {
+      tokenList: tokenAddys
+    }
+  });
+
+  const getP1Offer = useWeb3ExecuteFunction  ({
+    abi: tableContractAbi,
+    contractAddress: UserActiveTable? UserActiveTable.tableId : "0x0000000000000000000000000000000000000000",
+    functionName: "getparty1Offer",
+  });
+
+  useEffect(()=>{
+    console.log('tokenAddys: ',tokenAddys)
+    if (getP1Offer.data){
+      if (tokenAddys.length == getP1Offer.data[1].length){
+        console.log('GOT FINAL LIST: ', tokenAddys)
+        lookupTokenSymbolByAddress.fetch({
+          onError: (error) =>{
+              console.log('error with token lookups. Did one of the addresses not have a symbol? : ',error);
+            } 
+        })
+      }
+    }
+  },[tokenAddys]);
+
+  useEffect(()=>{
+    if (getP1Offer.data){
+      // console.log('data getP1Offer: ',getP1Offer.data[0]); //ERC721 tokens
+      console.log('P1 offers (ERC20): ',getP1Offer.data[1]); //ERC20 tokens
+      settokenAddys([]);
+      for (let i = 0; i <getP1Offer.data[1].length; i++){
+        // console.log('item: ',getP1Offer.data[1][i].contractAddress, parseInt(getP1Offer.data[1][i].amount._hex, 16))
+        settokenAddys(prevArray => [...prevArray, getP1Offer.data[1][i].contractAddress])
+      } 
+
+    }
+  },[getP1Offer.data])
+  
+  useEffect(()=>{
+    if (lookupTokenSymbolByAddress.data){
+      console.log('lookupTokenSymbolByAddress: ',lookupTokenSymbolByAddress.data); 
+      for (let i = 0 ; i < lookupTokenSymbolByAddress.data.length; i++){
+        console.log(lookupTokenSymbolByAddress.data[i], parseInt(getP1Offer.data[1][i].amount._hex,16) )
+      }
+    }
+  },[lookupTokenSymbolByAddress.data])
+
+
+
+
+
+  useEffect(()=>{
+    if (isWeb3Enabled){
+        getUserErc20Balances.fetchERC20Balances();
+        getP1Offer.fetch({
+            onError: (error) =>{
+                console.log('error with getP1Offer: ',error);
+              }
+          })
+      }
+  },[isWeb3Enabled])
+
+
 
   return (
     <>
@@ -40,30 +108,35 @@ const P1AssetBox = (props) => {
         <div style={{fontSize:'3vh'}}>
              ERC-20 Assets
           </div>  
-          <div style={{width:props.tableCreator?'80vw':'93.6vw',height:'75%',left:'1%',top:'20%', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
+          <div style={{width:props.tableCreator?'80vw':'93.6vw',height:'75%',left:'1%',top:'20%', overflow:'scroll', position:'absolute', backgroundColor:'rgba(0,0,0,0.3)', border:'1px dashed #999'}}>
      
-          <table style={{width:'100%'}} >
+          <table style={{width:'100%', }} >
             <tbody>
             <tr style={{backgroundColor:'rgba(100,100,250,0.5)',}}>
               <th>Token</th>
               <th>Amount</th>
               <th>Contract</th>
             </tr>
-            <tr>
-              <td>RUBY</td>
-              <td>14,600</td>
-              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
-            </tr>
-            <tr>
-              <td>EMERALD</td>
-              <td>9,500,000</td>
-              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
-            </tr>
-            <tr>
-              <td>ETH</td>
-              <td>14.6</td>
-              <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
-            </tr>
+
+            {/* {console.log(lookupTokenSymbolByAddress.data[i], parseInt(getP1Offer.data[1][i].amount._hex,16) )} */}
+            {lookupTokenSymbolByAddress.data?
+            lookupTokenSymbolByAddress.data.map((item, index)=>{
+              return(
+                <tr>
+                  <td>{item}</td>
+                  <td>{ (parseInt(getP1Offer.data[1][index].amount._hex,16) / (10 ** 18) ) }</td>
+                  <td><a href="https://yahoo.com" target='blank'>https://..</a></td>
+                </tr>
+              )
+            })
+
+            :
+            <></>
+            
+          
+            }
+
+            
             </tbody>
         </table>
 
