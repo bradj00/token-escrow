@@ -1,4 +1,4 @@
-export const tableFactoryContractAddress = '0xC039b07916581F1423f9451aEA769a5dc9C5E72a';
+export const tableFactoryContractAddress = '0x2F049D8AFEcc93e817189ef2C357e91238fd971A';
 
 export const baseUrl = 'https://10.0.1.4:3000/table/'; 
 

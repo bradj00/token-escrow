@@ -2,7 +2,7 @@
 pragma solidity ^0.8.1;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 
@@ -78,6 +78,12 @@ contract offerTable {
 
 ///////////////////////////////////////
 ///////////////////////////////////////
+    function getparty1ArrayOfErc20() public view returns(erc20Asset[] memory) {
+        return(party1ArrayOfErc20);
+    }
+    function getparty2ArrayOfErc20() public view returns(erc20Asset[] memory) {
+        return(party2ArrayOfErc20);
+    }
     function p1EjectAllRequest() public  onlyParty1  {
         p1RequestEjectBlock = block.number;
     }
@@ -86,15 +92,17 @@ contract offerTable {
 
         //transfer all erc721 tokens out
         //transfer all erc20 tokens out
-        for (uint i = 0; i < party1ArrayOfErc721.length; i++){
-            IERC721 nftContract;
-            nftContract = IERC721(party1ArrayOfErc721[i].contractAddress);
-            nftContract.safeTransferFrom( address(this), party1Address, party1ArrayOfErc721[i].tokenId); //transfer token from contract to party1Address
-            disableOfferTable=true;
-        }
+        // for (uint i = 0; i < party1ArrayOfErc721.length; i++){
+        //     IERC721 nftContract;
+        //     nftContract = IERC721(party1ArrayOfErc721[i].contractAddress);
+        //     nftContract.safeTransferFrom( address(this), party1Address, party1ArrayOfErc721[i].tokenId); //transfer token from contract to party1Address
+        //     disableOfferTable=true;
+        // }
         for (uint i = 0; i < party1ArrayOfErc20.length; i++){
-            IERC20 erc20Contract;
-            erc20Contract = IERC20(party1ArrayOfErc20[i].contractAddress);              
+            ERC20 erc20Contract = ERC20( party1ArrayOfErc20[i].contractAddress );
+           
+
+            //transfer amount exceeds allowance?????? 
             erc20Contract.transferFrom( address(this), party1Address, party1ArrayOfErc20[i].amount);  //transfer tokens from contract to party1Address
             disableOfferTable=true;
         }
@@ -113,15 +121,15 @@ contract offerTable {
 
         //transfer all erc721 tokens out
         //transfer all erc20 tokens out
-        for (uint i = 0; i < party2ArrayOfErc721.length; i++){
-            IERC721 nftContract;
-            nftContract = IERC721(party2ArrayOfErc721[i].contractAddress);
-            nftContract.safeTransferFrom( address(this), party2Address, party2ArrayOfErc721[i].tokenId); //transfer token from contract to party2Address
-            disableOfferTable=true;
-        }
+        // for (uint i = 0; i < party2ArrayOfErc721.length; i++){
+        //     IERC721 nftContract;
+        //     nftContract = IERC721(party2ArrayOfErc721[i].contractAddress);
+        //     nftContract.safeTransferFrom( address(this), party2Address, party2ArrayOfErc721[i].tokenId); //transfer token from contract to party2Address
+        //     disableOfferTable=true;
+        // }
         for (uint i = 0; i < party2ArrayOfErc20.length; i++){
-            IERC20 erc20Contract;
-            erc20Contract = IERC20(party2ArrayOfErc20[i].contractAddress);              
+            ERC20 erc20Contract = ERC20( party2ArrayOfErc20[i].contractAddress );
+                    
             erc20Contract.transferFrom( address(this), party2Address, party2ArrayOfErc20[i].amount);  //transfer tokens from contract to party2Address
             disableOfferTable=true;
         }
@@ -208,15 +216,19 @@ contract offerTable {
     function finalizeOfferParty1() onlyParty1 isOfferTableOpen public {
         finalizedP1 = true;
         if (finalizedP2 == true){
-            //we have the other signature. Transfer all tokens to their counter parties
+        if ( (p1RequestEjectBlock == 0)  && (p2RequestEjectBlock == 0)){
+            //we have the other signature. no ejects have been requested. Transfer all tokens to their counter parties
             executeSwap();
+        }
         }
     }
     function finalizeOfferParty2() onlyParty2 isOfferTableOpen public {
         finalizedP2 = true;
         if (finalizedP1 == true){
-            //we have the other signature. Transfer all tokens to their counter parties
+        if ( (p1RequestEjectBlock == 0)  && (p2RequestEjectBlock == 0)){
+            //we have the other signature. no ejects have been requested. Transfer all tokens to their counter parties
             executeSwap();
+        }
         } 
     }
 
