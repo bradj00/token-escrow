@@ -100,7 +100,7 @@ const P2AssetBox = (props) => {
     <div style={{display:'flex',justifyContent:'center',}}>
    
         <div>
-          <div style={{paddingLeft:'0.5vw', display:'flex', justifyContent:'center',  position:'absolute', top:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(255, 38, 0, 0.3)'}}>
+          <div style={{ display:'flex', justifyContent:'center',  position:'absolute', top:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(255, 38, 0, 0.3)'}}>
             <div style={{fontSize:'3vh'}}>
               ERC-20 Assets
             </div> 
@@ -137,7 +137,7 @@ const P2AssetBox = (props) => {
             </div>
 
           </div>
-          <div style={{paddingLeft:'0.5vw', display:'flex', justifyContent:'center', position:'absolute', bottom:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(255, 77, 38, 0.44)'}}>
+          <div style={{ display:'flex', justifyContent:'center', position:'absolute', bottom:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(255, 77, 38, 0.44)'}}>
             <div style={{fontSize:'3vh'}}>
               ERC-721 Assets
             </div>  

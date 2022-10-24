@@ -12,6 +12,7 @@ import TheUserErc20Balances from './sub-components/TheUserErc20Balances';
 import WarningIcon from '@mui/icons-material/Warning';
 import '../styles.css'
 import { Erc20Abi, tableContractAbi, TokenLookupFromAddyContract, TokenLookupFromAddyAbi } from '../helpers/contractInfo';
+import CheckIfTableIsDisabled from './sub-components/CheckIfTableIsDisabled';
 
 const OfferTable = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);
@@ -22,6 +23,11 @@ const OfferTable = (props) => {
     const something = location.pathname.replace('/', '');
     const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
     const {userErc20TokenBalance, setuserErc20TokenBalance}   = useContext(generalContext);
+    const {isTableDisabled, setisTableDisabled} = useContext(generalContext);
+    
+    
+    
+    
     const [counterParty, setcounterParty] = useState(false);
     const [tableCreator, settableCreator] = useState(false);
 
@@ -112,6 +118,7 @@ const OfferTable = (props) => {
     }
     return (
         <div style={{position:'absolute', width:'100%', height:'100%',display:'flex', justifyContent:'center',alignItems:'center'}}>
+            <CheckIfTableIsDisabled />
         <div className={clickedFinalize?"confirmationBox":"hiddenConfirmationbox"} style={{borderRadius:'5px',  border:'1px solid rgba(153, 21, 121, 1)', zIndex:'10000', display:'flex', justifyContent:'center', alignItems:'center', position:'absolute',width:'85vw', height:'60vh', backgroundColor:'rgba(23, 21, 121, 1)'}}>
             <div onClick={()=>{setclickedFinalize(false)}} className="finalizeButtonWithHover" style={{ padding:'1.5vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', top:'1%',right:'1%',}}>
                 X
@@ -137,11 +144,11 @@ const OfferTable = (props) => {
             </div>
             :<></>}
             
-            <div style={{overflow:'hidden', zIndex:'0',  display:'flex', justifyContent:'right', right:'0vw', top:'0vh', color:'#fff', zIndex:'9999', position:'absolute',width:'100%', fontSize:'3vh', userSelect:'none'}}>
-                <div style={{marginRight:'-32vw', zIndex:'-1', position:'absolute', width:'100%', height:'100vh', transform:'skew(-15deg,-15deg) rotateZ(15deg)', backgroundColor:'#0066ff',}}>
+            <div style={{overflow:'hidden', zIndex:'0',  display:'flex', justifyContent:'right', right:'0vw', top:'0vh', color:'#fff', zIndex:'9999', position:'absolute',width:'95%', fontSize:'3vh', userSelect:'none'}}>
+                <div style={{ zIndex:'-1', right:'8.5vw', top:'1vh', position:'absolute', width:'52%',  height:'100vh',transform:'skew(-10deg,-10deg) rotateZ(10deg)',  backgroundColor:'#0066ff',}}>
                 </div>
-
-                <div style={{ zIndex:'-1', left:'-10.5vw', position:'absolute', width:'50%', height:'100vh', transform:'skew(-15deg,-15deg) rotateZ(15deg)', backgroundColor:'#0033bb',}}>
+                
+                <div style={{ zIndex:'-1', left:'-5vw', top:'1vh', position:'absolute', width:'46%', height:'100vh', transform:'skew(-10deg,-10deg) rotateZ(10deg)', backgroundColor:'#0033bb',}}>
                 </div>
                 
                 <div style={{position:'absolute',top:'-5%', left:'14vw', fontSize:'70%'}}>
@@ -151,7 +158,7 @@ const OfferTable = (props) => {
                     {UserActiveTable? getEllipsisTxt(UserActiveTable.tableId.replace('0x',''),5): 0x0000000}
                 </div>
 
-                <div onClick={()=>{goBackHome();}} className="backButtonHover" style={{zIndex:'9999', position:'absolute', top:'1vh',left:'5vw',transform:'scale(1.7)',}}>
+                <div onClick={()=>{goBackHome();setisTableDisabled(false)}} className="backButtonHover" style={{zIndex:'99999', position:'absolute', top:'1vh',left:'1vw',transform:'scale(2)',}}>
                     <BackspaceIcon />
                 </div>
                 

@@ -104,7 +104,7 @@ const P1AssetBox = (props) => {
 
 
     <div style={{display:'flex', justifyContent:'center', alignItems:'center',marginTop:'50vh'}}>
-        <div style={{paddingLeft:'0.5vw', display:'flex',  justifyContent:'center',position:'absolute', top:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(40, 78, 255, 0.3)'}}>
+        <div style={{ display:'flex',  justifyContent:'center',position:'absolute', top:'0', left:'0', height:'50%', width:'100%', backgroundColor:'rgba(40, 78, 255, 0.3)'}}>
         <div style={{fontSize:'3vh'}}>
              ERC-20 Assets
           </div>  

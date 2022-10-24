@@ -6,7 +6,8 @@ import {MoralisProvider, } from 'react-moralis';
 import AccountTitle from './components/AccountTitle';
 import CounterPartyAddressInput from './components/CounterPartyAddressInput';
 import HomePage from './components/HomePage';
-import OfferTable from './components/OfferTable';
+import OfferTableEnabled from './components/OfferTableEnabled';
+import OfferTableDisabled from './components/OfferTableDisabled';
 import ReadQrCode from './components/ReadQrCode';
 
 export const generalContext   = React.createContext({});
@@ -23,7 +24,8 @@ function App() {
     const [showCounterPartyScanner, setshowCounterPartyScanner] = useState();
     const [CreateErrorText, setCreateErrorText] = useState();
     const [refreshUserEscrowTables, setrefreshUserEscrowTables] = useState(false);
-
+    
+    const [isTableDisabled, setisTableDisabled] = useState(false);
     
 
 
@@ -39,6 +41,7 @@ function App() {
       showCounterPartyScanner, setshowCounterPartyScanner,
       CreateErrorText, setCreateErrorText,
       refreshUserEscrowTables, setrefreshUserEscrowTables,
+      isTableDisabled, setisTableDisabled,
     };
 
 
@@ -52,7 +55,9 @@ function App() {
         :<></>}
 
         {showPage == 'offer'?
-          <OfferTable />
+         isTableDisabled?
+         <OfferTableDisabled />  :
+          <OfferTableEnabled />
         :<></>}
         
         {showPage == 'getQrCode'?
@@ -60,7 +65,7 @@ function App() {
         :<></>}
         
         
-        <div style={{boxShadow:'inset 0 0 5px rgba(255,255,255,0.3)', position:'absolute', width:'100vw', height:'100vh', backgroundColor:'rgba(0,0,0,0.9)', color:'#fff', justifyContent:'center', alignItems:'center', display:'flex', fontSize:'2vh', userSelect:'none'}}>
+        <div style={{boxShadow:isTableDisabled? 'inset 0 0 15px rgba(255,0,0,1)' :'inset 0 0 5px rgba(255,255,255,0.3)', position:'absolute', width:'100vw', height:'100vh', backgroundColor:'rgba(0,0,0,0.9)', color:'#fff', justifyContent:'center', alignItems:'center', display:'flex', fontSize:'2vh', userSelect:'none'}}>
           {/* base canvas */}
         </div>
 
