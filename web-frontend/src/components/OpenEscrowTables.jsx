@@ -103,7 +103,7 @@ const OpenEscrowTables = () => {
 
                             </tr>
                             {getAllMyTables.data?getAllMyTables.data.length>=1? getAllMyTables.data.map((item, index)=>{
-                                console.log('---',item);
+                                // console.log('---',item);
                                 return(
                                     <tr className="hoverOpenTable" onClick={()=>{goToOpenTable(item)}}  key={index}>
                                         <td>{getEllipsisTxt(item.tableId.replace('0x',''), 5)}</td>
