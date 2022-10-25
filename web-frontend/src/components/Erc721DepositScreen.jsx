@@ -20,7 +20,7 @@ const Erc721DepositScreen = () => {
     useEffect(()=>{
         if (isWeb3Enabled){
             console.log('GETTING FRESH NFT BALANCES');
-            getAllUserNfts.getNFTBalances({ params: { chain: "matic", address: "0x451E9948f930C33Bcda8d97F99fc1df4737921Db" } })
+            getAllUserNfts.getNFTBalances({ params: { chain: "matic",  } })
         }
     },[isWeb3Enabled])
 
