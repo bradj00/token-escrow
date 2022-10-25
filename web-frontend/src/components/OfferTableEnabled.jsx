@@ -13,6 +13,7 @@ import WarningIcon from '@mui/icons-material/Warning';
 import '../styles.css'
 import { Erc20Abi, tableContractAbi, TokenLookupFromAddyContract, TokenLookupFromAddyAbi } from '../helpers/contractInfo';
 import CheckIfTableIsDisabled from './sub-components/CheckIfTableIsDisabled';
+import Erc721DepositScreen from './Erc721DepositScreen';
 
 const OfferTable = (props) => {
     const {showPage, setshowPage} = useContext(generalContext);
@@ -24,7 +25,7 @@ const OfferTable = (props) => {
     const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
     const {userErc20TokenBalance, setuserErc20TokenBalance}   = useContext(generalContext);
     const {isTableDisabled, setisTableDisabled} = useContext(generalContext);
-    
+    const {displayErc721DepositPage, setdisplayErc721DepositPage} = useContext(generalContext);
     
     
     
@@ -136,6 +137,8 @@ const OfferTable = (props) => {
             
 
         </div>
+        { displayErc721DepositPage? <Erc721DepositScreen /> : <></>}
+
         <div style={{display:'flex', justifyContent:'center', position:'absolute', width:'100%', height:'100vh', zIndex:'9999'}}>
            
             {displayUserErc20Assets ? 

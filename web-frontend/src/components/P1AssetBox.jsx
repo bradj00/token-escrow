@@ -13,6 +13,8 @@ const P1AssetBox = (props) => {
   const {userErc20TokenBalance, setuserErc20TokenBalance} = useContext(generalContext);
   const {UserActiveTable, setUserActiveTable} = useContext(generalContext);
   const {displayUserErc20Assets, setdisplayUserErc20Assets} = useContext(generalContext);
+  const {displayErc721DepositPage, setdisplayErc721DepositPage} = useContext(generalContext);
+
   const [tokenAddys, settokenAddys] = useState([]);
   //{ fetchERC20Balances, data, isLoading, isFetching, error }
   const getUserErc20Balances = useERC20Balances();
@@ -188,7 +190,7 @@ const P1AssetBox = (props) => {
             <AddBoxIcon />
             </div>
 
-            <div className="addAssetButton" style={{position:'absolute', top:'30vh',transform:'scale(3)', right:'5%'}}>
+            <div onClick={()=>{setdisplayErc721DepositPage(!displayErc721DepositPage)}} className="addAssetButton" style={{position:'absolute', top:'30vh',transform:'scale(3)', right:'5%'}}>
             <AddBoxIcon />
             </div>
         </>:

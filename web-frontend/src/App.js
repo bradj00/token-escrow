@@ -26,6 +26,7 @@ function App() {
     const [refreshUserEscrowTables, setrefreshUserEscrowTables] = useState(false);
     
     const [isTableDisabled, setisTableDisabled] = useState(false);
+    const [displayErc721DepositPage, setdisplayErc721DepositPage] = useState(false);
     
 
 
@@ -42,6 +43,7 @@ function App() {
       CreateErrorText, setCreateErrorText,
       refreshUserEscrowTables, setrefreshUserEscrowTables,
       isTableDisabled, setisTableDisabled,
+      displayErc721DepositPage, setdisplayErc721DepositPage, 
     };
 
 
