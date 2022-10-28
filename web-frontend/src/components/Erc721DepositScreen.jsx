@@ -75,7 +75,7 @@ const Erc721DepositScreen = () => {
 
     return (
         <div className={displayErc721DepositPage?"confirmationBox":"hiddenConfirmationbox"} style={{borderRadius:'5px',  border:'1px solid rgba(153, 21, 121, 1)', zIndex:'10000', display:'flex', justifyContent:'center', alignItems:'center', top:'9vh', position:'absolute',width:'85vw', height:'88vh', backgroundColor:'rgba(23, 21, 121, 1)'}}>
-            <div onClick={()=>{setdisplayErc721DepositPage(false)}} className="finalizeButtonWithHover" style={{ padding:'1.5vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', top:'1%',right:'1%',}}>
+            <div onClick={()=>{setdisplayErc721DepositPage(false)}} className="finalizeButtonWithHover" style={{zIndex:'9999', padding:'1.5vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', top:'1%',right:'1%',}}>
                 X
             </div>
             {/* {SelectedErc721Address ?
@@ -90,8 +90,8 @@ const Erc721DepositScreen = () => {
                 <input placeholder="Paste address or select from list below" style={{position:'absolute',width:'98%',height:'5vh',left:'0vw',textAlign:'center', top:'0.5vh',fontSize:'3vh',color:'#fff',backgroundColor:'rgba(0,0,0,0)',border:'rgba(0,0,0,0)', outline:'none'}}></input>
             </div>
             :<></>}
-
-            <div style={{display:'flex', alignItems:'center', position:'absolute', top:'2vh',left:'2vh',fontSize:'2vw', color:'#fff'}}>
+            {SelectedErc721Address?
+            <div style={{display:'flex', alignItems:'center', position:'absolute', top:'2vh',left:'2vh',fontSize:'1.25vw', color:'#fff'}}>
                 <div style={{marginRight:'1vw',}}>
                     <ToggleSlider/> 
                 </div>
@@ -99,8 +99,9 @@ const Erc721DepositScreen = () => {
                     approve mass deposit
                 </div>
             </div>
+            :<></>}
 
-            <div style={{display:'flex', justifyContent:'center', overflow:'scroll', userSelect:'none',  textAlign:'center', color:'#fff', position:'absolute',bottom:'8vh', width:'105%', height:'92%', borderRadius:'5px',}}>
+            <div style={{display:'flex', justifyContent:'center', overflow:'scroll', userSelect:'none',  textAlign:'center', color:'#fff', position:'absolute',bottom:'1vh', width:'100%', height:'85%', borderRadius:'5px',}}>
                 
 
                 {!SelectedErc721Address?<table className="erc721Table">
@@ -127,9 +128,9 @@ const Erc721DepositScreen = () => {
                 <>
                  {/* SelectedErc721Address: {SelectedErc721Address} */}
 
-                    <div style={{height:'45%', width:'95%', top:'1vh', display:'flex', justifyContent:'center', alignItems:'center',  backgroundColor:'rgba(0,0,0,0.3)', position:'absolute', }}>
+                    <div style={{border:'1px solid rgba(0,0,0,0.5)', height:'45%', width:'95%', bottom:'1vh', display:'flex', justifyContent:'center', alignItems:'center',  backgroundColor:'rgba(0,0,0,0.3)', position:'absolute', }}>
                         
-                        <div style={{height:'75%', marginTop:'8vh', width:'25%',marginRight:'5vw',    backgroundColor:'rgba(0,0,0,0.3)', display:'flex', justifyContent:'center', alignItems:'center' }}>
+                        <div style={{borderRadius:'0.6vw',height:'75%', marginTop:'8vh', width:'25%',marginRight:'5vw',    backgroundColor:'rgba(0,0,0,0.3)', display:'flex', justifyContent:'center', alignItems:'center' }}>
                             
                             {
                                 SelectedErc721TokenUrl? 
@@ -146,7 +147,7 @@ const Erc721DepositScreen = () => {
                         }
 
                         </div>
-                        <div style={{placeItems:'center', height:'72%', marginTop:'8vh', width:'65%',marginLeft:'1vw',  gridTemplateColumns:'repeat(5,1fr)',gridColumnGap:'1vw',gridRowGap:'2vh',  backgroundColor:'rgba(0,0,0,0.3)', padding:'0.5vw', display:'grid',  alignItems:'center' }}>
+                        <div style={{borderRadius:'0.6vw', placeItems:'center', height:'72%',  marginTop:'8vh', width:'65%',marginLeft:'1vw',  gridTemplateColumns:'repeat(5,1fr)',gridColumnGap:'1vw',gridRowGap:'2vh',  backgroundColor:'rgba(0,0,0,0.3)', padding:'0.5vw', display:'grid',  alignItems:'center' }}>
                             
                             
                             {
@@ -156,7 +157,7 @@ const Erc721DepositScreen = () => {
                                 SelectedErc721Object.metadata.attributes.map((item, index)=>{
                                     return(
                                         <div style={{backgroundColor:'rgba(150,0,0,0.4)', position:'relative', display:'flex', justifyContent:'center',  width:'6vw', height:'6vw', border:'1px solid rgba(150,0,0,0.6)', borderRadius:'0.5vw'}}>
-                                            <div style={{position:'absolute', top:'1%', fontSize:'100%'}}>
+                                            <div style={{position:'absolute', top:'1%', fontSize:'90%', fontWeight:'bolder', color:'rgba(255,150,150,1)', }}>
                                                 {item.trait_type}
                                             </div>
                                             <div style={{position:'absolute', bottom:'20%',}}>
@@ -171,10 +172,10 @@ const Erc721DepositScreen = () => {
 
                     </div>
 
-                    <div style={{overflow:'scroll', height:'50%', width:'95%', bottom:'1vh', backgroundColor:'rgba(0,0,0,0.3)', position:'absolute',display:'flex', justifyContent:'center', alignItems:'center'}}>
+                    <div style={{border:'1px solid rgba(0,0,0,0.5)', overflow:'scroll', height:'50%', width:'95%', top:'1vh', backgroundColor:'rgba(0,0,0,0.3)', position:'absolute',display:'flex', justifyContent:'center', alignItems:'center'}}>
                         <table style={{position:'absolute', top:'0vh',}} className="erc721Table">
-                            <thead>
-                                <tr>
+                            <thead >
+                                <tr style={{position:'sticky', top:'0vh', background:'rgba(0,0,0,0.9)'}}>
                                     <th>Selected</th>
                                     <th>Token ID</th>
                                     <th>Name</th>
