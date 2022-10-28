@@ -4,7 +4,7 @@ import { generalContext } from '../App';
 import { useEffect } from 'react';
 import {useNFTBalances, useMoralis} from 'react-moralis';
 import { ToggleSlider }  from "react-toggle-slider";
-
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 const Erc721DepositScreen = () => {
 
@@ -12,8 +12,12 @@ const Erc721DepositScreen = () => {
 
     const {displayErc721DepositPage, setdisplayErc721DepositPage} = useContext(generalContext);
     const {clickedFinalize, setclickedFinalize} = useContext(generalContext);
-    const [UserUniqueContractArr, setUserUniqueContractArr]             = useState();
-    const [SelectedErc721Address, setSelectedErc721Address]             = useState();
+    const [UserUniqueContractArr, setUserUniqueContractArr]                     = useState();
+    const [SelectedErc721Address, setSelectedErc721Address]                     = useState();
+    const [displayErc721DepositAddy, setdisplayErc721DepositAddy]               = useState();
+    const [DisplayErc721DepositTokenArr, setDisplayErc721DepositTokenArr]       = useState();
+    const [SelectedErc721TokenUrl, setSelectedErc721TokenUrl]                   = useState();
+    const [SelectedErc721Object, setSelectedErc721Object]                       = useState();
 
     const getAllUserNfts = useNFTBalances();
 
@@ -25,8 +29,21 @@ const Erc721DepositScreen = () => {
     },[isWeb3Enabled])
 
     useEffect(()=>{
+        if (displayErc721DepositAddy){
+            console.log('displayErc721DepositAddy:',displayErc721DepositAddy);
+            // getAllUserNfts.getNFTBalances({ params: { chain: "matic",  } })
+
+            const temp = getAllUserNfts.data.result.filter((item)=>{
+                return (item.token_address == displayErc721DepositAddy? item : null) 
+            })
+            console.log('temp:',temp);
+            setDisplayErc721DepositTokenArr(temp);
+        }
+    },[displayErc721DepositAddy])
+
+    useEffect(()=>{
         if (getAllUserNfts.data){
-            // console.log('getAllUserNfts.data: \t\t', getAllUserNfts.data);
+            console.log('getAllUserNfts.data: \t\t', getAllUserNfts.data);
         if (getAllUserNfts.data.result){
         if (getAllUserNfts.data.result.length >  0){
             // console.log('\t\t\t-------------- got all NFTs owned by account [ '+account+' ]', getAllUserNfts.data.result);
@@ -57,16 +74,24 @@ const Erc721DepositScreen = () => {
     },[displayErc721DepositPage]);
 
     return (
-        <div className={displayErc721DepositPage?"confirmationBox":"hiddenConfirmationbox"} style={{borderRadius:'5px',  border:'1px solid rgba(153, 21, 121, 1)', zIndex:'10000', display:'flex', justifyContent:'center', alignItems:'center', top:'9vh', position:'absolute',width:'85vw', height:'85vh', backgroundColor:'rgba(23, 21, 121, 1)'}}>
+        <div className={displayErc721DepositPage?"confirmationBox":"hiddenConfirmationbox"} style={{borderRadius:'5px',  border:'1px solid rgba(153, 21, 121, 1)', zIndex:'10000', display:'flex', justifyContent:'center', alignItems:'center', top:'9vh', position:'absolute',width:'85vw', height:'88vh', backgroundColor:'rgba(23, 21, 121, 1)'}}>
             <div onClick={()=>{setdisplayErc721DepositPage(false)}} className="finalizeButtonWithHover" style={{ padding:'1.5vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', top:'1%',right:'1%',}}>
                 X
             </div>
-            
+            {/* {SelectedErc721Address ?
+                <div onClick={()=>{setSelectedErc721Address()}} className="finalizeButtonWithHover" style={{ padding:'1.5vh', paddingLeft:'3vh', paddingRight:'3vh', position:'absolute', top:'1%',left:'1%',}}>
+                    <KeyboardReturnIcon />
+                    
+                </div>
+                : <></>
+            } */}
+            {!SelectedErc721Address?
             <div style={{position:'absolute',top:'2vh',fontWeight:'bolder',width:'70%',height:'6vh',borderRadius:'25px',border:'1px solid #0066ff'}}>
                 <input placeholder="Paste address or select from list below" style={{position:'absolute',width:'98%',height:'5vh',left:'0vw',textAlign:'center', top:'0.5vh',fontSize:'3vh',color:'#fff',backgroundColor:'rgba(0,0,0,0)',border:'rgba(0,0,0,0)', outline:'none'}}></input>
             </div>
+            :<></>}
 
-            <div style={{display:'flex', alignItems:'center', position:'absolute', top:'11vh',left:'2vh',fontSize:'2vw', color:'#fff'}}>
+            <div style={{display:'flex', alignItems:'center', position:'absolute', top:'2vh',left:'2vh',fontSize:'2vw', color:'#fff'}}>
                 <div style={{marginRight:'1vw',}}>
                     <ToggleSlider/> 
                 </div>
@@ -75,7 +100,7 @@ const Erc721DepositScreen = () => {
                 </div>
             </div>
 
-            <div style={{display:'flex', justifyContent:'center', overflow:'scroll', userSelect:'none',  textAlign:'center', color:'#fff', position:'absolute',bottom:'1vh', width:'95%', height:'75%', backgroundColor:'rgba(0,0,0,0.2)',borderRadius:'5px',padding:'1vw'}}>
+            <div style={{display:'flex', justifyContent:'center', overflow:'scroll', userSelect:'none',  textAlign:'center', color:'#fff', position:'absolute',bottom:'8vh', width:'105%', height:'92%', borderRadius:'5px',}}>
                 
 
                 {!SelectedErc721Address?<table className="erc721Table">
@@ -89,7 +114,7 @@ const Erc721DepositScreen = () => {
                     <tbody>
                 {UserUniqueContractArr? UserUniqueContractArr.map((item, index)=>{
                     return(
-                            <tr key={index} onClick={()=> {console.log('selected: ',item.address); setSelectedErc721Address(item.address)} }>
+                            <tr key={index} onClick={()=> {setdisplayErc721DepositAddy(item.address); setSelectedErc721Address(item.address)} }>
                                 <td>{item.address}</td>
                                 <td>{item.name}</td>
                                 <td>{item.symbol}</td>
@@ -104,11 +129,44 @@ const Erc721DepositScreen = () => {
 
                     <div style={{height:'45%', width:'95%', top:'1vh', display:'flex', justifyContent:'center', alignItems:'center',  backgroundColor:'rgba(0,0,0,0.3)', position:'absolute', }}>
                         
-                        <div style={{height:'95%', width:'25%',marginRight:'5vw',    backgroundColor:'rgba(250,0,0,0.3)', display:'flex', justifyContent:'center', alignItems:'center' }}>
-                            SELECTED TOKEN IMAGE
+                        <div style={{height:'75%', marginTop:'8vh', width:'25%',marginRight:'5vw',    backgroundColor:'rgba(0,0,0,0.3)', display:'flex', justifyContent:'center', alignItems:'center' }}>
+                            
+                            {
+                                SelectedErc721TokenUrl? 
+                                <img src={SelectedErc721TokenUrl} style={{height:'95%', width:'95%', objectFit:'contain'}}></img>
+                            : <>SELECTED TOKEN IMAGE</>
+                            }
                         </div>
-                        <div style={{height:'85%', width:'65%',marginLeft:'1vw',    backgroundColor:'rgba(0,250,0,0.3)', display:'flex', justifyContent:'center', alignItems:'center' }}>
-                            METADATA
+
+                        <div style={{position:'absolute', top:'1vh', fontSize:'2vw',color:'#f5f5f5', width:'50%', right:'10%', }}>
+                        {
+                                SelectedErc721Object?
+                                SelectedErc721Object.metadata.name
+                        :<></>
+                        }
+
+                        </div>
+                        <div style={{placeItems:'center', height:'72%', marginTop:'8vh', width:'65%',marginLeft:'1vw',  gridTemplateColumns:'repeat(5,1fr)',gridColumnGap:'1vw',gridRowGap:'2vh',  backgroundColor:'rgba(0,0,0,0.3)', padding:'0.5vw', display:'grid',  alignItems:'center' }}>
+                            
+                            
+                            {
+                                SelectedErc721Object?
+                                //map out each of the metadata fields here from DisplayErc721DepositTokenArr.metadata as a grid of 5 columns
+
+                                SelectedErc721Object.metadata.attributes.map((item, index)=>{
+                                    return(
+                                        <div style={{backgroundColor:'rgba(150,0,0,0.4)', position:'relative', display:'flex', justifyContent:'center',  width:'6vw', height:'6vw', border:'1px solid rgba(150,0,0,0.6)', borderRadius:'0.5vw'}}>
+                                            <div style={{position:'absolute', top:'1%', fontSize:'100%'}}>
+                                                {item.trait_type}
+                                            </div>
+                                            <div style={{position:'absolute', bottom:'20%',}}>
+                                                {item.value}
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            : <>METADATA</>
+                            }
                         </div>
 
                     </div>
@@ -125,13 +183,13 @@ const Erc721DepositScreen = () => {
                                 </tr>
                             </thead>
                                 <tbody>
-                            {UserUniqueContractArr? UserUniqueContractArr.map((item, index)=>{
+                            {DisplayErc721DepositTokenArr? DisplayErc721DepositTokenArr.map((item, index)=>{
                                 return(
-                                        <tr key={index} onClick={()=> {console.log('selected: ',item.address); setSelectedErc721Address(item.address)} }>
+                                        <tr key={index} onClick={()=> {console.log('selected: ',item); setSelectedErc721TokenUrl(item.metadata.image); setSelectedErc721Object(item) } }>
                                             <td><input type="checkbox"></input></td>
-                                            <td>41772</td>
-                                            <td>MCP Land</td>
-                                            <td>MCPL</td>
+                                            <td>{item.token_id}</td>
+                                            <td>{item.metadata.name}</td>
+                                            <td>{item.symbol}</td>
                                         </tr>
                                     )
                                 })
