@@ -41,16 +41,16 @@ const OpenEscrowTables = () => {
 
     
   useEffect(()=>{
-    if (refreshUserEscrowTables == true){
+    if (refreshUserEscrowTables == true && isWeb3Enabled){
         console.log('refreshing user tables...')
         getAllMyTables.fetch({
             onError: (error) =>{
-                alert('web3 error fetching user tables: ');
-                alert(error);
-              }
+                console.log('web3 error fetching user tables: ');
+                console.log(error);
+            }
           })
     }
-  },[refreshUserEscrowTables])
+  },[refreshUserEscrowTables, isWeb3Enabled])
 
   useEffect(()=>{
     if (getAllMyTables.data){

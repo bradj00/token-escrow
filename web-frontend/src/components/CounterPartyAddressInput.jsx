@@ -63,7 +63,7 @@ const CounterPartyAddressInput = (props) => {
     useEffect(()=>{
         if (counterPartyAddress){
             props.setofferTableContractAddress(counterPartyAddress);
-            alert('....updating variable...');
+            console.log('....updating variable...');
             
         }
     },[counterPartyAddress]);
@@ -82,14 +82,14 @@ const CounterPartyAddressInput = (props) => {
         // setshowPage('offer');
         createNewEscrowTable.fetch({
             onError: (error) =>{
-                alert('web3 error creating new Escrow Table: ');
-                alert(error);
-                alert('...');
+                console.log('web3 error creating new Escrow Table: ');
+                console.log(error);
+                console.log('...');
                 // console.log('web3 error creating new Escrow Table: ',error);
                 // setCreateErrorText(JSON.stringify(error));
               },
             onSuccess:(tx2)=>tx2.wait().then(newTx2 => {
-                alert('tx confirmed: ',newTx2)
+                console.log('tx confirmed: ',newTx2)
                 setrefreshUserEscrowTables(true);
                 // console.log('tx confirmed: ',newTx2)
                 // setCreateErrorText(JSON.stringify(newTx2));
@@ -103,7 +103,7 @@ const CounterPartyAddressInput = (props) => {
                 //getMyTables[getMyTables.length] //get last entry in the array 
             }),
             onComplete: ()=>{
-                alert('Awaiting confirmation...');
+                console.log('Awaiting confirmation...');
                 // console.log('Awaiting confirmation...');
                 // setCreateErrorText('Awaiting confirmation...');
             }

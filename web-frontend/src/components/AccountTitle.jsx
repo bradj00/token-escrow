@@ -2,6 +2,7 @@ import React from 'react'
 import {MoralisProvider, useMoralis, useChain, account,} from 'react-moralis';
 import {useEffect} from 'react';
 import {getEllipsisTxt} from '../helpers/formatters';
+import { MoralisAuth5 } from './sub-components/MoralisAuth5';
 
 const AccountTitle = () => {
     const {Moralis, enableWeb3, web3, isWeb3Enabled, authenticate, isAuthenticated, account, user, logout} = useMoralis();
@@ -21,6 +22,11 @@ const AccountTitle = () => {
   
     return (  
         <div style={{userSelect:'none', zIndex:'9999', position:'absolute',width:'100%',top:'0',display:'flex', justifyContent:'center',color:'#fff'}}>
+          {!isAuthenticated?
+            <div style={{zIndex:'99999', cursor:'pointer'}}>
+              <MoralisAuth5 />
+            </div>: <></>
+          }
             <div style={{paddingTop:'2vh'}}>
                 <div style={{textAlign:'center', fontSize:'2vh',color:'#aaa'}}>
                     Hello

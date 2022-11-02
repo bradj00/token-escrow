@@ -9,6 +9,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom'
 import ReadQrCodePasteCounterParty from './ReadQrCodePasteCounterParty';
 import QRCode from 'react-qr-code'
 import { getEllipsisTxt } from '../helpers/formatters';
+import UpdateContractData from './sub-components/UpdateContractData';
 
 
 const HomePage = () => {
@@ -28,6 +29,10 @@ const HomePage = () => {
   },[activeTableDefined])
 
   useEffect(()=>{
+    console.log('isAuthenticated: ',isAuthenticated);
+  },[isAuthenticated]);
+
+  useEffect(()=>{
     if (!isWeb3Enabled){
       enableWeb3();
       setCreateErrorText('enabling web3...')
@@ -39,11 +44,14 @@ const HomePage = () => {
 
   return (
     <div>
+      
+
       {showCounterPartyScanner?
       <ReadQrCodePasteCounterParty />
       :
       <div style={{display:'flex', justifyContent:'center',  }}>
         <AccountTitle />
+        <UpdateContractData />
         <CounterPartyAddressInput offerTableContractAddress={offerTableContractAddress} setofferTableContractAddress={setofferTableContractAddress}/>
 
         <div style={{display:'flex', justifyContent:'center', fontSize:'2vh',position:'absolute', top:'10vh',color:'rgba(120,250,120,1)', zIndex:'9999', border:'2px solid #fff'}}>

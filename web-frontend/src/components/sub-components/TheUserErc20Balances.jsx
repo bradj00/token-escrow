@@ -174,7 +174,7 @@ const TheUserErc20Balances = (props) => {
 
   useEffect(()=>{
     if (getUserErc20Balances.data){
-    //   console.log('[ '+account+' ] user ERC20 balances: ',getUserErc20Balances.data);
+      console.log('[ '+account+' ] user ERC20 balances: ',getUserErc20Balances.data);
       setuserErc20TokenBalance(getUserErc20Balances.data);
     }
   },[getUserErc20Balances.data])
