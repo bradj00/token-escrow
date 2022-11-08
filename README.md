@@ -4,7 +4,7 @@ Permissionless escrow service dapp to help two parties securely trade assets wit
 
 Contracts written in Solidity. Front end written in React.
 
-This is also my first dApp designed with a mobile-first approach to UI/UX rather than desktop.
+This is my first dApp designed with a mobile-first approach to UI/UX rather than desktop.
 
 
 ### New Escrow setup UI in progress
