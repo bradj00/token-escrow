@@ -1,10 +1,10 @@
 # token-escrow
 
-Permissionless escrow service dapp to help two parties securely trade assets with minimal trust and no third party.
+Permissionless escrow service dapp to help two parties securely trade assets with no trust and no third party.
 
-Written in Solidity and mostly ReactJS.
+Contracts written in Solidity. Front end written in React.
 
-This is also a dApp I am designing with a mobile-first approach to designing UI/UX rather than desktop. 
+This is also my first dApp designed with a mobile-first approach to UI/UX rather than desktop.
 
 
 ### New Escrow setup UI in progress
